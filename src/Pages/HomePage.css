@@ -23,7 +23,7 @@ body{
 }
 span{
     color:#12229d;
-    font-size: 1.9em;
+    font-size: 1.7em;
     font-weight: 600;
     margin-left: 50px;
     cursor: pointer;
@@ -67,4 +67,7 @@ span{
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
+}
+.content{
+    z-index: 1000;
 }

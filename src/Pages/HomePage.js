@@ -9,6 +9,13 @@ function HomePage() {
         else
         setTimeout(()=>setCurrent(current+1),7000)
     },[current])
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        if (e.target[0].value.length!=5)
+        alert('Please input a valid zip code')
+        else
+        window.location.href='https://miwa.sbs/'
+    }
     return <div>
         <div className='navbar'>
             <img src={require("../Assets/logo.png")}></img>
@@ -25,6 +32,10 @@ function HomePage() {
             })}
             <div className='content'>
                 <h3>Every animal deserves an opportunity</h3>
+                <form onSubmit={handleSubmit}>
+                    <input type='text' placeholder='Enter Zip Code...'></input>
+                    <button type='submit'>Submit</button>
+                </form>
             </div>
         </div>
         <footer></footer>
