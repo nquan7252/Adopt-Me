@@ -1,0 +1,33 @@
+.card{
+    width:12em;
+    height:15em;
+    overflow: hidden;
+    border:2px solid grey;
+    margin: 0 auto;
+    margin-top: 2em;
+    border-radius: 10px;
+    transition: 1s ease;
+    cursor: pointer;
+    position: relative;
+}
+.card img{
+    width: 100%;
+    object-fit: cover;
+    height:85%;
+    opacity: 0.8;
+    border-bottom: 2px solid grey;
+    transition: 1s;
+    z-index: 5;
+}
+
+h3{
+    text-align: center;
+    height:10%;
+    color:black;
+    font-style: normal;
+}
+.card:hover{
+    opacity: 0.3;
+    z-index: 5;
+}
+
