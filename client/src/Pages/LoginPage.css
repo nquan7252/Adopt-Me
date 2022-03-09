@@ -1,0 +1,27 @@
+.page{
+    width: 100vw;
+    height:100vh;
+    display: flex;
+    background-color: black;
+    justify-content: center;
+    align-items: center;
+}
+input,button{
+    width: 100%;
+    margin: 10px 0;
+    padding:10px 5px;
+}
+#login-container{
+    background-color: white;
+    padding:50px 50px;
+}
+#other-actions{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+#or{
+    padding-top: 20px;
+    font-size: 1.5em;
+}

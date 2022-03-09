@@ -2,7 +2,27 @@ import React, { Component, useEffect, useState } from "react";
 import "./HomePage.css";
 import { images } from "../Helper/ImageHelper";
 import NavBar from "../Components/NavBar";
+import axios from "axios";
+import isLoggedIn from "../Helper/isLoggedIn";
 function HomePage() {
+  const checkLogIn = () => {
+    axios
+      .get("http://localhost:3001/authenticate", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("AccessToken"),
+        },
+      })
+      .then(() => setLoggedIn(true))
+      .catch(setLoggedIn(false));
+  };
+
+  const [loggedIn, setLoggedIn] = useState(null);
+  useEffect(() => {
+    isLoggedIn()
+      .then(() => setLoggedIn(true))
+      .catch(() => setLoggedIn(false));
+  }, []);
+
   const [current, setCurrent] = useState(0);
   useEffect(() => {
     if (current == images.length) setCurrent(0);
@@ -15,7 +35,7 @@ function HomePage() {
   };
   return (
     <div>
-      <NavBar/>
+      <NavBar isLoggedIn={loggedIn} />
       <div className="body">
         {images.map((element, index) => {
           return (

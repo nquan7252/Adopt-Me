@@ -6,13 +6,19 @@ import {BrowserRouter,Routes,Route, Router} from 'react-router-dom'
 import SearchPage from './Pages/SearchPage';
 import PetProfile from './Pages/PetProfile';
 import Filter from './Components/Filter';
+import LoginPage from './Pages/LoginPage';
+import SignupPage from './Pages/SingupPage';
+import PublicRoute from './Routes/PublicRoute';
+import UserPage from './Pages/UserPage';
 function App() {
   return <BrowserRouter>
   <Routes>
     <Route exact path='/' element={<HomePage/>}/>
+    <Route path='/login' element={<LoginPage/>}></Route>
+    <Route path='/signup' element={<SignupPage/>}></Route>
+    <Route path='/user' element={<UserPage/>}></Route>
     <Route path='/search' element={<SearchPage/>}></Route>
     <Route path='/pet/profile' element={<PetProfile/>}/>
-    
     {/* // <Route path='/login'/> */}
     <Route path='/test' element={<Filter/>}/>
   </Routes>
