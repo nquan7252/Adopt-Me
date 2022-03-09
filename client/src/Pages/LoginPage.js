@@ -9,10 +9,11 @@ import { useEffect } from 'react';
 import { Navigate } from 'react-router';
 import { Routes } from 'react-router';
 function LoginPage () {
-        const loggedIn=isLoggedIn();
-        console.log(loggedIn)
+        const [loggedIn,setLoggedIn]=useState(async ()=>{
+            await isLoggedIn().then(()=>setLoggedIn(true)).catch(()=>setLoggedIn(false));
+        })
     return <div className='page'>
-                {loggedIn?<LoginForm/>:<LoginForm/>} 
+                {loggedIn?window.location.href='/user':<LoginForm/>} 
     </div>;
 }
 
