@@ -8,7 +8,7 @@ function NavBar(props) {
     </Link>
     {!props.isLoggedIn?
     <div>
-      <Link to='/login'>
+      <Link to='/login's >
       <span>Log in</span>
       </Link>
       <Link to='/signup'>
