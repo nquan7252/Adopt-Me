@@ -1,0 +1,47 @@
+.contact{
+    color:white;
+    position: relative;
+    background-color: #1f173d;
+    height:auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding:100px;
+    padding-right: 50px;
+}
+.contact h3{
+    color:#e5ecce;
+    margin-bottom: 10px;
+    text-align: start;
+}
+.contact h5{
+    font-weight: 400;
+}
+.about{
+    max-width: 500px;
+    color: white;
+}
+.about p{
+    line-height: 40px;
+    margin-top: 20px;
+}
+.contact img{
+    width: 100px;
+    height: 100px;
+    filter: invert(1);
+    transform: scale(2.7);
+    object-fit: cover;
+}
+.info{
+    
+}
+.social h3{
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+.social img{
+    width: 15px;
+    height:15px;
+    object-fit: cover;
+    margin:0 30px;
+}
