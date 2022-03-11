@@ -23,7 +23,7 @@ const checkAlreadyExist="SELECT * FROM account WHERE username=?"
 var con = mysql.createPool({
   host: "localhost",
   user: "root",
-  password: "nguyenquan00",
+  password: "",
   database: "sql_account",
 });
 
