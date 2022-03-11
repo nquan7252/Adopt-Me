@@ -1,0 +1,29 @@
+.contact{
+    color:white;
+    position: relative;
+    background-color: #1f173d;
+    height:auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding:20px;
+}
+.contact h3{
+    color:white;
+    margin-bottom: 10px;
+}
+.contact h5{
+    font-weight: 400;
+}
+.contact img{
+    width: 100px;
+    height: 100px;
+    filter: invert(1);
+    transform: scale(2.7);
+    object-fit: cover;
+}
+.info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

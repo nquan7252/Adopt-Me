@@ -3,12 +3,13 @@
     height:15em;
     overflow: hidden;
     border:2px solid grey;
-    margin: 0 auto;
+    margin: 0 20px;
     margin-top: 2em;
     border-radius: 10px;
     transition: 1s ease;
     cursor: pointer;
     position: relative;
+    
 }
 .card img{
     width: 100%;
@@ -19,12 +20,15 @@
     transition: 1s;
     z-index: 5;
 }
-
+ a{
+    text-decoration: none;
+}
 h3{
     text-align: center;
     height:10%;
     color:black;
     font-style: normal;
+    text-decoration: none;
 }
 .card:hover{
     opacity: 0.3;

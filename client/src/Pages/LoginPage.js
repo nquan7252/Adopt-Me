@@ -6,14 +6,19 @@ import SignupForm from '../Components/SignupForm';
 import isLoggedIn from '../Helper/isLoggedIn';
 import { BrowserHistory } from 'history';
 import { useEffect } from 'react';
-import { Navigate } from 'react-router';
+import { Navigate, useLocation } from 'react-router-dom';
 import { Routes } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 function LoginPage () {
         const [loggedIn,setLoggedIn]=useState(async ()=>{
             await isLoggedIn().then(()=>setLoggedIn(true)).catch(()=>setLoggedIn(false));
         })
+        let navigate=useNavigate();
+        const location=useLocation();
+        console.log(location)
+        
     return <div className='page'>
-                {loggedIn?window.location.href='/user':<LoginForm/>} 
+                {loggedIn?navigate('/user'):<LoginForm from={location.state!=null?location.state.from:'/' }/>} 
     </div>;
 }
 

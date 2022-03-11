@@ -5,6 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 import Card from "../Components/Card";
 import NavBar from "../Components/NavBar";
+import Filter from "../Components/Filter";
 function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [data, setData] = useState(null);
@@ -13,7 +14,8 @@ function SearchPage() {
     setData(res.data)});
   },[]);
   return<><NavBar/>
-  {data&&<div>
+  <Filter/>
+  {data&&<div className="card-container">
      {data.animals.map(element=><Card key={element.id} data={element}></Card>)}
   </div>}
   </> 

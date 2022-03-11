@@ -10,8 +10,9 @@ import LoginPage from './Pages/LoginPage';
 import SignupPage from './Pages/SingupPage';
 import PublicRoute from './Routes/PublicRoute';
 import UserPage from './Pages/UserPage';
+import Contact from './Components/Contact';
 function App() {
-  return <BrowserRouter>
+  return <>
   <Routes>
     <Route exact path='/' element={<HomePage/>}/>
     <Route path='/login' element={<LoginPage/>}></Route>
@@ -20,10 +21,10 @@ function App() {
     <Route path='/search' element={<SearchPage/>}></Route>
     <Route path='/pet/profile' element={<PetProfile/>}/>
     {/* // <Route path='/login'/> */}
-    <Route path='/test' element={<Filter/>}/>
+    <Route path='/test' element={<Contact/>}/>
   </Routes>
 
-   </BrowserRouter>
+   </>
 }
 
 export default App;

@@ -2,9 +2,10 @@
     width: 100vw;
     height:100vh;
     display: flex;
-    background-color: black;
+    background-image: url('../Assets/background.png');
     justify-content: center;
     align-items: center;
+    background-size: cover;
 }
 input,button{
     width: 100%;
@@ -13,7 +14,23 @@ input,button{
 }
 #login-container{
     background-color: white;
+    box-shadow: 0 0 10px black;
     padding:50px 50px;
+    width:500px;
+    height:350px
+}
+#login-container button{
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1em;
+    color:white;
+    background-color:#3b2e6b ;
+    transition:500ms;
+    border: none;
+}
+#login-container button:hover{
+    background-color:#1f173d ;
+
 }
 #other-actions{
     display: flex;

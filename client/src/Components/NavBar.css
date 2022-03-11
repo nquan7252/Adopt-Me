@@ -1,3 +1,30 @@
-.navbar img{
+.navbar .user img{
     
+    width: 13px !important;;
+    height: 13px !important;;
+    cursor: pointer;
+}
+.navbar .user a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navbar a>img{
+    transform: scale(3.5);
+}
+.navbar{
+    height:50px;
+}
+.navbar{
+    padding-right:40px!important;
+}
+.navbar span{
+    color:white;
+    background-color: #1f173d; 
+    padding: 10px;
+    font-size: 0.9em;
+    border-radius: 10px;
+}
+.user{
+    margin-left: 60px;
 }

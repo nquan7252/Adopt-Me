@@ -1,21 +1,25 @@
 import axios from 'axios';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 function LoginForm(props) {
+    const navigate=useNavigate();
+    const [error,setError]=useState(false);
     const handleLogin=(e)=>{
         e.preventDefault();
         axios.post('http://localhost:3001/login',{username:e.target[0].value,password:e.target[1].value}).then(message=>{
         localStorage.setItem('AccessToken',message.data.accessToken)    
-        console.log(message)
-        //window.location.href=props.from;
-    });
+        console.log(message)  
+        navigate(props.from);
+    }).catch(()=>setError(true));
     }
     return <div id='login-container'>
     <h2>Login</h2>
     <form onSubmit={handleLogin}>
         <input name='username' type='text' placeholder='Username'></input>
         <input name='password' type='password' placeholder='Password'></input>
-        <button>Sign in</button>
+        {error&&<div style={{color:'red',fontSize:'10px'}}>Username or password is incorrect</div>}
+        <button>SIGN IN</button>
     </form>
     <div id='other-actions'>
         <span>Forgot Password?</span>
