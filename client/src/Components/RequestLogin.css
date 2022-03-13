@@ -1,0 +1,29 @@
+.request-login{
+    padding: 40px 30px;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    background-color: #1f173d;
+    border-radius: 10px;
+    color:white;
+    z-index: 11;
+}
+.request-login div{
+    margin-top: 10px;
+    text-align: center;
+}
+.request-login a{
+    text-decoration: underline;
+    color:#e5ecce;
+}
+.request-login img{
+    width: 15px;
+    height:15px;
+    filter: invert(1);
+    position: absolute;
+    top:0;
+    right: 0;
+    cursor: pointer;
+    transform: translate(-10px,10px);
+}

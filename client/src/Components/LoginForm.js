@@ -16,7 +16,9 @@ function LoginForm(props) {
     return <div id='login-container'>
     <h2>Login</h2>
     <form onSubmit={handleLogin}>
+        <h5>Username</h5>
         <input name='username' type='text' placeholder='Username'></input>
+        <h5>Password</h5>
         <input name='password' type='password' placeholder='Password'></input>
         {error&&<div style={{color:'red',fontSize:'10px'}}>Username or password is incorrect</div>}
         <button>SIGN IN</button>

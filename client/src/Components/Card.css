@@ -1,38 +1,103 @@
 .card{
-    width:12em;
-    height:15em;
-    overflow: hidden;
-    border:2px solid grey;
-    margin: 0 20px;
+    width:15em;
+    height:12em;
+    margin: 40px 20px;
     margin-top: 2em;
-    border-radius: 10px;
     transition: 1s ease;
     cursor: pointer;
     position: relative;
     animation:fadeIn linear 500ms;
+    position: relative;
 }
-.card img{
+.card>a>img{
+    border-radius: 20px;
     width: 100%;
+    height: 90%;
     object-fit: cover;
-    height:85%;
     opacity: 0.8;
-    border-bottom: 2px solid grey;
     transition: 1s;
-    z-index: 5;
+    z-index: 1;
+    top:0;
+    bottom:0;
+    left:0;
+    right: 0;
 }
  a{
     text-decoration: none;
 }
-h3{
-    text-align: center;
-    height:10%;
+.card h3{
+    text-align: start;
+    font-size: 0.9em;
     color:black;
     font-style: normal;
     text-decoration: none;
+    max-width: 90%;
 }
-.card:hover{
+.card h5{
+    color:rgb(182, 179, 179);
+    max-width: 90%;
+
+}
+.card>a>img:hover{
     opacity: 0.3;
-    z-index: 5;
+}
+.heart{
+    width: 10px;
+    height:10px;
+    position:absolute;
+    right:0;
+    bottom:-10px;
+    top:auto;
+    left:auto;  
+    height:20px;
+    width: 20px;
+    border-radius:0;
+    z-index: 10;
+    
+}
+.name-holder{
+    position: relative;
+    height: 10%;
+}
+/* .name-holder{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    right: 0;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 15%;
+    background-color: #1f173d;
+   
+    border-top-left-radius: 45%;
+    border-top-right-radius: 45%;
+   
+} */
+.action{
+    width: 100%;
+    height:100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.action div{
+    z-index: 10;
+    margin-bottom: 55px;
+}
+.active{
+    animation:bounceIn 200ms linear;
+}
+@keyframes bounceIn {
+    from{
+        transform: scale(1.5);
+    }
+    to{
+        transform: scale(1);
+    }
 }
 @keyframes fadeIn{
     from{

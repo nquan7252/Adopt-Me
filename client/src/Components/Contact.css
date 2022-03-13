@@ -6,7 +6,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding:100px;
+    padding:30px 100px;
     padding-right: 50px;
 }
 .contact h3{
@@ -44,4 +44,11 @@
     height:15px;
     object-fit: cover;
     margin:0 30px;
+}
+#attribute{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color:gray;
+    padding-left: 5px;
 }

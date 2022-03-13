@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Contact.css";
+import { Link } from "react-router-dom";
 function Contact() {
   return (
     <div className="contact">
@@ -27,6 +28,7 @@ function Contact() {
           </div>
         </div>
       </div>
+      <Link id="attribute" to="https://www.flaticon.com/free-icons/instagram" title="instagram icons">Icons created by Freepik - Flaticon</Link>
     </div>
   );
 }

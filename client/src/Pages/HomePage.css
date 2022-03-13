@@ -170,6 +170,10 @@ h1{
 .login-signup span{
   margin-left: 20px;
   display: inline;
+  transition: 300ms linear;
+}
+.login-signup span:hover{
+  background-color: #574792;
 }
 .login-signup{
   margin-left:20px;
@@ -188,9 +192,15 @@ h1{
   display: flex;
 }
 #login{
-  background-color: transparent;
+  background-color: white;
   color:#1f173d;
-  border:1px solid #1f173d
+  border:1px solid #1f173d;
+  z-index: 10;
+  transition: 1s;
+}
+#login:hover{
+  background-color: #574792;
+  color:white;
 }
 .animal{
   display: flex;
@@ -242,7 +252,7 @@ h1{
 .animal img:nth-child(2){
   transform: translate(0,20px);
 }.animal img:nth-child(3){
-  transform: translate(-50px,-100px);
+  transform: translate(-70px,-100px);
 }
 .img-container img:nth-child(4){
   position: absolute;

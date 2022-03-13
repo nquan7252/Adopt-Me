@@ -8,7 +8,6 @@ var exec = require("child_process").exec;
 const jwt=require('jsonwebtoken');
 var mysql = require("mysql");
 
-const URL = "https://api.petfinder.com/v2/animals?type=dog&page=1";
 const TOKEN_URL = "https://api.petfinder.com/v2/oauth2/token";
 const API_KEY = "1PcE3E0Tf6eIIcNTf8wiytdxoBy4ZSEMjDMJKbrAsdJDqYTC6K";
 const SECRET = "UvehDKy01zwXUEGGSpFAvyKSZ6t9fWAuBXKcKfTr";
@@ -47,6 +46,8 @@ const search = (res,url) => {
 app.use(express.json());
 app.use(cors());
 app.get("/search", (req, res) => {
+  let page=req.query.page||1;
+  var URL = `https://api.petfinder.com/v2/animals?type=dog&page=${page}&limit=100`;
     search(res,URL);
 })
 app.get("/test", (req, res) => {
@@ -68,7 +69,6 @@ app.post("/signup", (req, res) => {
       }
     );
   })
-  
 });
 app.post("/login", (req, res) => {
   con.query(
