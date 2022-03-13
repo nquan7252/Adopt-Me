@@ -13,6 +13,8 @@ import UserPage from './Pages/UserPage';
 import Contact from './Components/Contact';
 import Spinner from './Components/Spinner';
 import RequestLogin from './Components/RequestLogin';
+import ImageSlider from './Components/ImageSlider';
+import ImageIndex from './Components/ImageIndex';
 function App() {
   return <>
   <Routes>
@@ -23,7 +25,7 @@ function App() {
     <Route path='/search' element={<SearchPage/>}></Route>
     <Route path='/pet/profile' element={<PetProfile/>}/>
     {/* // <Route path='/login'/> */}
-    <Route path='/test' element={<RequestLogin/>}/>
+    <Route path='/test' element={<ImageSlider/>}/>
   </Routes>
   <Contact/>
    </>
