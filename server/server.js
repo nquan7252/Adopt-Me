@@ -6,7 +6,16 @@ var fetch = require("node-fetch");
 const e = require("express");
 var exec = require("child_process").exec;
 const jwt=require('jsonwebtoken');
+const path=require('path')
 var mysql = require("mysql");
+
+const API_KEY2='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'
+var sengrid=require('@sendgrid/mail');
+sengrid.setApiKey(API_KEY2);
+
+const API_KEY1="64b90238fd46902f6435bb063a12259c-dbc22c93-0406e405"
+const DOMAIN="sandboxb14500b19fdb4cea846f8e5aa810152c.mailgun.org"
+var mailgun = require('mailgun-js')({apiKey: API_KEY1, domain: DOMAIN});
 
 const TOKEN_URL = "https://api.petfinder.com/v2/oauth2/token";
 const API_KEY = "1PcE3E0Tf6eIIcNTf8wiytdxoBy4ZSEMjDMJKbrAsdJDqYTC6K";
@@ -15,10 +24,14 @@ var token =
   "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxUGNFM0UwVGY2ZUlJY05UZjh3aXl0ZHhvQnk0WlNFTWpETUpLYnJBc2RKRHFZVEM2SyIsImp0aSI6ImIzYTQzNWEyYzhhOGQ3YmJlMjI3NTBiNTM5NzBlOWViNmI1MWQyMzQzMzQwZTkzYjlhYWU5NzRmNzZmYWUyYzRmYWVhMTI5Y2IyNGMzZTAxIiwiaWF0IjoxNjQ1NTExNDgxLCJuYmYiOjE2NDU1MTE0ODEsImV4cCI6MTY0NTUxNTA4MSwic3ViIjoiIiwic2NvcGVzIjpbXX0.ZX6Xi2uUeLyE1fJUZc8NNTeflXhqBrcJbySLq8ewjScIl49Cif7h49C4NU3SgaUTuyU5Ad9EweO2gV1OFCM5_9WAz7jq1bUHjzgIquYEv4_-7A6vkvfxZqr03BxUPkZSQzecxjW2YPQfe7Rt4NbpBgD5js2dXDxSMRfj6f-KzG-uDdT02g_CnoXqFjuJmgQIakFjtGQ4IrsKViAf1yLD4Ft00X8cgiTsN6krvCS7fUEaw-sZ-AuwgvizqoJ5rH1YLr29t9d4ZKbSsTWtAPXAPnUM7imXSqBT8VxZdxuXYSS8NzCH9dS1YVxhEJxPQEyMyt6x8nUjgH3OrrbClRIQWw";
 var app = express();
 const PORT = process.env.PORT || 3001;
+
+const updatePasswordQuery="UPDATE account SET password=? WHERE username=?"
 const createUserQuery =
   "INSERT INTO account (name,username,password) VALUES(?,?,?)";
 const fetchUserQuery = "SELECT * FROM account WHERE username=? AND password=?";
 const checkAlreadyExist="SELECT * FROM account WHERE username=?"
+
+
 var con = mysql.createPool({
   host: "localhost",
   user: "root",
@@ -85,17 +98,55 @@ app.post("/login", (req, res) => {
   );
 });
 
-// app.get("/user/:id", (req, res) => {
-//   console.log(req.params);
-//   res.status(403).render();
-//   //res.send('you requested id' +req.params);
-//   //es.status(200).send('you requested for user id ',req.params);
-// });
+
 app.get('/user',authToken,(req,res)=>{
   res.send(req.user);
 })
 app.get('/authenticate',authToken,(req,res)=>{
   res.send("Hi");
+})
+
+app.post('/reset-password',(req,res)=>{
+  con.query(checkAlreadyExist,[req.body.username],(err,result)=>{
+    if (err) console.log(err);
+    if (result.length){
+      console.log(result)
+      const accessToken=jwt.sign(JSON.stringify(result),process.env.ACCESS_TOKEN_SECRET);
+      const message={
+        from:"mquan7252@gmail.com",
+        to:result[0].username,
+        subject:"Adopt Me Password Reset",
+        message:"You have just requested a password reset for your account. Please follow the link below to reset your password",
+        html:`<a href="http://localhost:3001/reset-password/${accessToken}">Reset password</a>`
+      }
+      sengrid.send(message).then(()=>console.log('email sent')).catch(console.log)
+      }
+    else res.status(400).send("account does not exist");
+  })
+})
+app.get('/reset-password/:token',(req,res)=>{
+  var token=req.params.token;
+  jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,user)=>{
+    if (err) return res.status(401).send('Token no longer valid - no access')
+    res.sendFile(path.join(__dirname, './public', 'index.html'));
+    
+  })
+})
+app.put('/reset-password-next',(req,res)=>{
+  var token=req.body.token;
+  var newPassword=req.body.newPassword;
+  jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,user)=>{
+    if (err) return res.status(401).send('Token no longer valid - no access')
+    con.query(updatePasswordQuery,[newPassword,user.username],(err,result)=>{
+      if (err) console.log(err);
+      else 
+        console.log('idk what to put here');
+    })
+
+
+
+
+  })
 })
 function authToken(req,res,next){
   console.log('here')
