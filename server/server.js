@@ -139,7 +139,7 @@ app.put('/reset-password-next',(req,res)=>{
 
 
 
-
+    
   })
 })
 function authToken(req,res,next){
