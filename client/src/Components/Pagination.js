@@ -15,7 +15,7 @@ function Pagination(props) {
     return <div className='pagination'>
                 {currentPage>=2&&<img src={require('../Assets/arrowleft.png')} onClick={props.prevPage}></img>}
         {/* <div>{currentPage}</div> */}
-        {pageArray.map(element=><div id={currentPage==element?'activepage':''} key={element}>{element}</div>)}
+        {pageArray.map(element=><div id={currentPage==element?'activepage':''} key={element} onClick={()=>props.jumpPage(element)}>{element}</div>)}
         <img src={require('../Assets/arrowright.png')} onClick={props.nextPage}></img>
     
     </div>;

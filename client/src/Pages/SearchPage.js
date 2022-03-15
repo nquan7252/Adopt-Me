@@ -11,7 +11,6 @@ import Spinner from "../Components/Spinner";
 import RequestLogin from "../Components/RequestLogin";
 import { useParams } from "react-router-dom";
 import Pagination from "../Components/Pagination";
-
 import { useNavigate } from "react-router-dom";
 function SearchPage(props) {
   const navigate=useNavigate()
@@ -51,13 +50,16 @@ function SearchPage(props) {
      {data.animals.map(element=><Card key={element.id} handleShowRequest={handleShowRequest} data={element}></Card>)}
   </div>:<Spinner/>}
   {showRequest&&<RequestLogin closeRequest={handleCloseRequest}/>}
-  <Pagination currentPage={currentPage} nextPage={()=>{
+  {data&&<Pagination jumpPage={(page)=>{
+    setCurrentPage(page)
+    navigate('/search/'+page)
+  }} currentPage={currentPage} nextPage={()=>{
     setCurrentPage(Number(currentPage)+1);
     navigate('/search/'+(Number(currentPage)+1))
 }} prevPage={()=>{
   setCurrentPage(Number(currentPage)-1);
   navigate('/search/'+(Number(currentPage)-1))
-}}/>
+}}/>}
   </div>
   </> 
 }

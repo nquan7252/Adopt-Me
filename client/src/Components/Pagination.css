@@ -13,6 +13,7 @@
 }
 .pagination div{
     margin:0 5px;
+    cursor: pointer;
     padding:10px 30px;
     text-align: center;
 }
