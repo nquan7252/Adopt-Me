@@ -20,12 +20,13 @@
     height:3px;
     left: 0;
     bottom: 0;
+    transform: scale(0);
     background-color: black;
-    transform-origin: bottom left;
-    animation: spread 300ms linear;
+    animation: spread 300ms linear forwards;
+    overflow: hidden;
 }
 @keyframes spread {
     to{
-        transform-origin: bottom right;
+        transform: scale(1);
     }
 }

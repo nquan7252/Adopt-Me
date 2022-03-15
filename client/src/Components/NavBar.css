@@ -39,7 +39,9 @@
     padding:0;
     animation: fade ease 500ms;
 }
-
+.dropdown span:hover{
+    background-color: transparent;
+}
 @keyframes fade {
     from{
         opacity: 0;
