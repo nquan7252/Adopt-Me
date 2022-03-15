@@ -4,10 +4,10 @@ import { useState } from 'react';
 import NavBar from '../Components/NavBar';
 import isLoggedIn from '../Helper/isLoggedIn';
 import { useEffect } from 'react';
+import ImageSlider from'../Components/ImageSlider'
 function PetProfile() {
     const location=useLocation();
-    const dat=location.state;
-    const {data,setData}=useState(location.state);
+    const [data,setData]=useState(location.state.data);
     const [loggedIn, setLoggedIn] = useState(null);
   useEffect(() => {
     isLoggedIn()
@@ -16,7 +16,8 @@ function PetProfile() {
   }, []);
     return <div>
         <NavBar isLoggedIn={loggedIn}/>
-        {dat.name}</div>;
+        <ImageSlider images={data.photos}/>
+        </div>;
 }
 
 export default PetProfile;

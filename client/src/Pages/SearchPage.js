@@ -9,19 +9,21 @@ import Filter from "../Components/Filter";
 import isLoggedIn from "../Helper/isLoggedIn";
 import Spinner from "../Components/Spinner";
 import RequestLogin from "../Components/RequestLogin";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import Pagination from "../Components/Pagination";
-function SearchPage() {
+function SearchPage(props) {
   const overlay=useRef();
-  const [pageParam,setPageParam]=useSearchParams();
+  const pageNum=useParams();
   const [loggedIn, setLoggedIn] = useState(null);
   useEffect(() => {
     isLoggedIn()
       .then(() => setLoggedIn(true))
-      .catch(() => setLoggedIn(false));
+      .catch((err) => {
+        console.log(err.response.data);
+        setLoggedIn(false)});
   }, []);
   const [currentPage,setCurrentPage]=useState(()=>{
-    return pageParam.get('page');
+    return pageNum.page;
   });
   const handleShowRequest=()=>{
     setShowRequest(true);
@@ -35,9 +37,8 @@ function SearchPage() {
   const [data, setData] = useState(null);
   useEffect(() => {
     console.log('hereeee',currentPage)
-    let page=pageParam.get('page')||1;
-    axios.get(`http://localhost:3001/search?page=${currentPage}`).then((res) =>{console.log(res.data) 
-    setData(res.data)});
+    axios.get(`http://localhost:3001/search/${currentPage}`).then((res) =>{console.log(res.data) 
+    setData(res.data)}).catch(err=>console.log(err.response.data));
   },[currentPage]);
   return<><NavBar isLoggedIn={loggedIn}/>
   <Filter/>

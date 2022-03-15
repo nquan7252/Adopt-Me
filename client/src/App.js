@@ -13,7 +13,9 @@ import UserPage from './Pages/UserPage';
 import Contact from './Components/Contact';
 import Spinner from './Components/Spinner';
 import RequestLogin from './Components/RequestLogin';
-import PasswordResetPage from './Pages/PasswordResetPage';
+import PasswordResetPage from './Pages/PasswordResetPage2';
+import PasswordResetPage2 from './Pages/PasswordResetPage2';
+import PasswordResetPage1 from './Pages/PasswordResetPage1';
 function App() {
   return <>
   <Routes>
@@ -21,9 +23,11 @@ function App() {
     <Route path='/login' element={<LoginPage/>}></Route>
     <Route path='/signup' element={<SignupPage/>}></Route>
     <Route path='/user' element={<UserPage/>}></Route>
-    <Route path='/search' element={<SearchPage/>}></Route>
+    <Route path='/search/:page' element={<SearchPage/>}></Route>
     <Route path='/pet/profile' element={<PetProfile/>}/>
     {/* // <Route path='/login'/> */}
+    <Route path='/reset-password' element={<PasswordResetPage1/>}></Route>
+    <Route path='/reset-password/:token' element={<PasswordResetPage2/>}></Route>
     <Route path='/test' element={<RequestLogin/>}/>
     <Route path='/reset' element={<PasswordResetPage/>}/>
   </Routes>

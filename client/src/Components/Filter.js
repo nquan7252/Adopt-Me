@@ -26,7 +26,7 @@ function Filter() {
             </form>
         </div>
      
-        <div className='advanced-search'>
+        <div className='advanced-search' style={{display:'none'}}>
             <h4>Advanced Search</h4>
             <form onSubmit={handleSubmit}>
                 <select onChange={handleChange}>

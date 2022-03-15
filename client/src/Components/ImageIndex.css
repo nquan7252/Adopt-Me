@@ -1,0 +1,20 @@
+.image-index{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    height:50px;
+}
+.image-index div{
+    cursor: pointer;
+    width:20px;
+    height: 20px;
+    border-radius: 50%;
+    border:2px solid black;
+    margin:0 10px;
+}
+.active{
+    background-color: white;
+}
