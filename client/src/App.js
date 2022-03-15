@@ -16,6 +16,7 @@ import RequestLogin from './Components/RequestLogin';
 import PasswordResetPage from './Pages/PasswordResetPage2';
 import PasswordResetPage2 from './Pages/PasswordResetPage2';
 import PasswordResetPage1 from './Pages/PasswordResetPage1';
+import SelectionBar from './Components/SelectionBar';
 function App() {
   return <>
   <Routes>
@@ -28,7 +29,7 @@ function App() {
     {/* // <Route path='/login'/> */}
     <Route path='/reset-password' element={<PasswordResetPage1/>}></Route>
     <Route path='/reset-password/:token' element={<PasswordResetPage2/>}></Route>
-    <Route path='/test' element={<RequestLogin/>}/>
+    <Route path='/test' element={<SelectionBar/>}/>
     <Route path='/reset' element={<PasswordResetPage/>}/>
   </Routes>
   <Contact/>
