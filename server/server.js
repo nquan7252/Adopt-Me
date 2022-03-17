@@ -11,6 +11,7 @@ var mysql = require("mysql");
 
 const API_KEY2='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'
 var sengrid=require('@sendgrid/mail');
+const { CONNREFUSED } = require('dns');
 sengrid.setApiKey(API_KEY2);
 
 const API_KEY1="64b90238fd46902f6435bb063a12259c-dbc22c93-0406e405"
@@ -26,12 +27,12 @@ const PORT = process.env.PORT || 3001;
 
 const updatePasswordQuery="UPDATE account SET password=? WHERE username=?"
 const createUserQuery =
-  "INSERT INTO account (name,username,password) VALUES(?,?,?)";
+  "INSERT INTO account (name,username,password,avatar) VALUES(?,?,?,?)";
 const fetchUserQuery = "SELECT * FROM account WHERE username=? AND password=?";
 const checkAlreadyExist="SELECT * FROM account WHERE username=?"
-const saveQuery="UPDATE account SET saved=concat(COALESCE(saved,''),?,' ') WHERE username=?"
+const saveQuery="UPDATE account SET saved=concat('[',TRIM(LEADING '[' FROM TRIM(TRAILING ']' FROM COALESCE(saved,''))),?,',',']') WHERE username=?"
 const getSavedQuery="SELECT saved FROM account WHERE username=?"
-const removeSavedQuery="UPDATE account SET saved=REPLACE(saved,CONCAT(?,' '),'')"
+const removeSavedQuery="UPDATE account SET saved=REPLACE(saved,CONCAT(?,','),'')"
 var con = mysql.createPool({
   host: "localhost",
   user: "root",
@@ -71,7 +72,7 @@ app.use(express.json());
 app.use(cors());
 app.get("/search/:page", (req, res) => {
   let page=req.params.page;
-  var URL = `https://api.petfinder.com/v2/animals?type=dog&page=${page}&limit=100`;
+  let URL = `https://api.petfinder.com/v2/animals?page=${page}&limit=100`;
     search(res,URL,token);
 })
 app.get("/test", (req, res) => {
@@ -86,7 +87,7 @@ app.post("/signup", (req, res) => {
     }
     else con.query(
       createUserQuery,
-      [req.body.name, req.body.email, req.body.password],
+      [req.body.name, req.body.email, req.body.password,req.body.avatar],
       (err, result) => {
         if (err) console.log(err);
         else res.send('Account successfully created');
@@ -162,32 +163,77 @@ app.put('/reset-password-next',(req,res)=>{
 })
 app.get('/save',savedAuthToken,(req,res)=>{
   console.log("saving animal ",req.animalId,req.user[0].username)
-  con.query(saveQuery,[req.animalId,req.user[0].username],(err,result)=>{
+  let animalObj={
+    id:req.animalId,
+    name:req.animalName,
+    photo:req.animalPhoto,
+    gender:req.animalGender,
+    location:req.animalLocation,
+    breed:req.animalBreed
+  }
+  con.query(saveQuery,[JSON.stringify(animalObj),req.user[0].username],(err,result)=>{
     if (err) console.log(err);
-    else
+    else{
     console.log(result);
+    res.end()
+    }
   })
 })
 app.get('/unsave',savedAuthToken,(req,res)=>{
-  con.query(removeSavedQuery,[req.animalId],(err,result)=>{
+  console.log('user want to unsave')
+  let animalObj={
+    id:req.animalId,
+    name:req.animalName,
+    photo:req.animalPhoto,
+    gender:req.animalGender,
+    location:req.animalLocation,
+    breed:req.animalBreed
+  }
+  con.query(removeSavedQuery,[JSON.stringify(animalObj),req.user[0].username],(err,result)=>{
     if (err) console.log(err);
     else{
-      res.send('Removed saved animal')
+    console.log('unsave done');
+    res.end()
     }
   })
+
+
+  // con.query(removeSavedQuery,[req.animalId],(err,result)=>{
+  //   if (err) console.log(err);
+  //   else{
+  //     res.send('Removed saved animal')
+  //   }
+  // })
 })
 app.get('/getSaved',authToken,(req,res)=>{
     con.query(getSavedQuery,[req.user[0].username],(err,result)=>{
       if (err) console.log(err)
       else{
-        let savedAnimalsId;
-        if (result[0].saved==null) savedAnimalsId=null;
+        let savedAnimalsId=[];
+        if (result[0].saved==null) res.send(null)
         else{
-         savedAnimalsId=result[0].saved.split(" ");
+          var stringArray=result[0].saved;
+          var newStringArray=stringArray.slice(0,-2)+']';
+          console.log(newStringArray);
+          res.json(newStringArray);
         }
-        res.send(savedAnimalsId);
       }
     })
+})
+app.get('/petId',(authToken),(req,res)=>{
+  let URL='https://api.petfinder.com/v2/animals/'+req.query.animalId;
+  search(res,URL,token)
+})
+app.get('/avatar',(authToken),(req,res)=>{
+  console.log('get avatar')
+  con.query(checkAlreadyExist,[req.user[0].username],(err,result)=>{
+    if (err) console.log(err)
+    else{
+      console.log(result)
+      res.send(result[0].avatar);
+      
+    }
+  })
 })
 function savedAuthToken(req,res,next){
   console.log('save auth')
@@ -200,6 +246,11 @@ function savedAuthToken(req,res,next){
     if (err) return res.status(405).send('Token no longer valid - no access')
     req.user=user;
     req.animalId=req.query.animalId;
+    req.animalName=req.query.animalName;
+    req.animalPhoto=req.query.animalPhoto;
+    req.animalGender=req.query.animalGender;
+    req.animalLocation=req.query.animalLocation;
+    req.animalBreed=req.query.animalBreed;
     console.log('next')
     next();
   })

@@ -16,14 +16,23 @@ function SearchPage(props) {
   const navigate=useNavigate()
   const overlay=useRef();
   const pageNum=useParams();
-  const [loggedIn, setLoggedIn] = useState(null);
-  useEffect(() => {
-    isLoggedIn()
-      .then(() => setLoggedIn(true))
+  //consider changing this to get avatar faster
+  // const [loggedIn, setLoggedIn] = useState(()=>{
+  //   isLoggedIn()
+  //     .then(() => setLoggedIn(true))
+  //     .catch((err) => {
+  //       console.log(err.response.data);
+  //       setLoggedIn(false)});
+  // });
+  const [loggedIn, setLoggedIn] = useState(()=>{
+    axios.get('http://localhost:3001/avatar',{headers:{
+      authorization:'Bearer '+localStorage.getItem('AccessToken')
+    }})
+      .then((res) => setLoggedIn(res.data))
       .catch((err) => {
         console.log(err.response.data);
         setLoggedIn(false)});
-  }, []);
+  });
   const [currentPage,setCurrentPage]=useState(()=>{
     return pageNum.page;
   });
@@ -35,6 +44,41 @@ function SearchPage(props) {
     setShowRequest(false);
     overlay.current.style.display='none'
   }
+  const handleSave=(data)=>{
+    setSaved(prev=>[...prev,String(data.id)]);
+    axios.get('http://localhost:3001/save',{headers:{
+    authorization:'Bearer '+ localStorage.getItem('AccessToken')},
+    params:{
+    animalId:data.id,
+    animalName:data.name,
+    animalPhoto:data.photos[0].medium,
+    animalGender:data.gender,
+    animalLocation:data.contact.address.city+", "+data.contact.address.state+" "+data.contact.address.postcode,
+    animalBreed:data.breeds.primary
+
+}})
+  }
+  const handleUnsave=(data)=>{
+    setSaved(prev=>{
+      let arr=[...prev];
+      arr.splice(arr.indexOf(String(data.id)),1)
+      return arr
+    })
+    axios.get('http://localhost:3001/unsave',{headers:{
+    authorization:'Bearer '+ localStorage.getItem('AccessToken')},
+    params:{
+    animalId:data.id,
+    animalName:data.name,
+    animalPhoto:data.photos[0].medium,
+    animalGender:data.gender,
+    animalLocation:data.contact.address.city+", "+data.contact.address.state+" "+data.contact.address.postcode,
+    animalBreed:data.breeds.primary
+}})
+    // setSaved(prev=>{
+    //   let savedArray=[...prev]
+    //   return savedArray.splice(savedArray.indexOf(data.id),1)
+    // })
+  }
   const [showRequest,setShowRequest]=useState(false);
   const [data, setData] = useState(null);
   useEffect(() => {
@@ -42,12 +86,41 @@ function SearchPage(props) {
     axios.get(`http://localhost:3001/search/${currentPage}`).then((res) =>{console.log(res.data) 
     setData(res.data)}).catch(err=>console.log(err.response.data));
   },[currentPage]);
+
+  const [saved,setSaved]=useState([])
+  
+  useEffect(()=>{
+    if (loggedIn){
+      console.log('start fetching save')
+    axios.get("http://localhost:3001/getSaved",{headers:{
+        Authorization:'Bearer ' +localStorage.getItem('AccessToken')}}
+    ).then(result=>{
+      console.log('result from getsave is',result.data)
+        let likedAnimals=[...JSON.parse(result.data)]
+        let idArray=[]
+        for (let i=0;i<likedAnimals.length;i++){
+          idArray.push(likedAnimals[i].id)
+        }
+        setSaved(idArray)
+    }).catch(()=>{console.log('some thing wrong')
+      setSaved([])})}
+    else return null
+},[loggedIn])
+    
+    
+  const checkSave=(id)=>{
+    if (saved!=null){
+      for (let idd of saved)
+      if(idd==id)return true;
+  }
+  return false;
+  }
   return<><NavBar isLoggedIn={loggedIn}/>
   <Filter/>
   <div className="big-card-container">
     <div ref={overlay} className="overlay"></div>
   {data?<div className="card-container">
-     {data.animals.map(element=><Card key={element.id} handleShowRequest={handleShowRequest} data={element}></Card>)}
+     {data.animals.map(element=><Card location={element.contact.address.city+", "+element.contact.address.state+" "+element.contact.address.postcode} breed={element.breeds.primary} image={element.primary_photo_cropped?element.primary_photo_cropped.medium:null} isSaved={checkSave(element.id)} unsave={handleUnsave} save={handleSave} key={element.id} loggedIn={loggedIn} handleShowRequest={handleShowRequest} data={element}></Card>)}
   </div>:<Spinner/>}
   {showRequest&&<RequestLogin closeRequest={handleCloseRequest}/>}
   {data&&<Pagination jumpPage={(page)=>{

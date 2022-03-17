@@ -1,0 +1,15 @@
+.avatar-chooser{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.avatar-chooser img{
+    width: 60px !important;
+    height:60px;
+    margin:20px 20px;
+   cursor: pointer;
+}
+.avatar-chooser #active{
+    border-radius: 50%;
+    outline: 5px solid black;
+}

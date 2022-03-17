@@ -1,17 +1,29 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios'
 function NavBar(props) {
   const navigate=useNavigate();
   const currentLocation = useLocation();
+  const [img,setImg]=useState(null)
+
+  // useEffect(()=>{
+  //   console.log('fetching avba',props.isLoggedIn)
+  //   if (props.isLoggedIn){
+  //     axios.get('http://localhost:3001/avatar',{headers:{
+  //       Authorization:'Bearer '+localStorage.getItem('AccessToken')
+  //     }}).then(result=>setImg(result.data))
+  //   }
+  // },[props.isLoggedIn])
   const [open, setOpen] = useState(false);
   const logOut=()=>{
     localStorage.removeItem('AccessToken');
     window.location.href='/'
   }
+  
   return (
     <div className="navbar">
       <Link to="/">
@@ -39,18 +51,18 @@ function NavBar(props) {
         ) : (
           <div className="login-signup user">
             <img
-              src={require("../Assets/profileicon.png")}
+              src={props.isLoggedIn}
               onClick={() => setOpen(!open)}
             ></img>
             {open && (
               <div className="dropdown">
-                <Link to="/user">
+                <Link to='/user' state={{chosen:'profile'}}>
                   <div>
                     <img src={require("../Assets/dashboard.png")}></img>
                     <span>Profile</span>
                   </div>
                 </Link>
-                <Link to="/archive">
+                <Link to='/user' state={{chosen:'mypets'}}>
                   <div>
                     <img src={require("../Assets/archive.png")}></img>
                     <span>My pets</span>

@@ -42,7 +42,17 @@ body,html{
   display: block;
   height:100%;
 }
-
+.unsave-banner{
+  position:fixed;
+  top: 0;
+  font-size: 1em;
+  color:white;
+  font-weight: 600;
+  width: 100vw;
+  padding:10px;
+  background-color: rgb(129, 175, 59);
+  z-index: 10;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
