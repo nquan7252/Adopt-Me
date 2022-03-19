@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useRef } from "react";
 import "./SearchPage.css";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import Card from "../Components/Card";
@@ -16,6 +16,9 @@ function SearchPage(props) {
   const navigate=useNavigate()
   const overlay=useRef();
   const pageNum=useParams();
+  const [searchParams,setSearchParams]=useSearchParams()
+
+  console.log(searchParams.get("num"))
   //consider changing this to get avatar faster
   // const [loggedIn, setLoggedIn] = useState(()=>{
   //   isLoggedIn()
@@ -36,6 +39,12 @@ function SearchPage(props) {
   const [currentPage,setCurrentPage]=useState(()=>{
     return pageNum.page;
   });
+  const [filterParams,setfilterParams]=useState({location:'',type:'',coat:'',color:'',gender:''})
+  const handleFilterSearch=(info)=>{
+    //axios.get('http://localhost:3001/search/1')
+    //set params
+    setfilterParams(info)
+  }
   const handleShowRequest=()=>{
     setShowRequest(true);
     overlay.current.style.display='block'
@@ -83,9 +92,15 @@ function SearchPage(props) {
   const [data, setData] = useState(null);
   useEffect(() => {
     console.log('hereeee',currentPage)
-    axios.get(`http://localhost:3001/search/${currentPage}`).then((res) =>{console.log(res.data) 
-    setData(res.data)}).catch(err=>console.log(err.response.data));
-  },[currentPage]);
+    axios.get(`http://localhost:3001/search/${currentPage}`,{params:filterParams}).then((res) =>{console.log(res.data) 
+    setData(res.data)
+  }
+    ).catch(err=>{
+      setfilterParams({location:'',type:'',coat:'',color:'',gender:''})
+      alert('Invalid input, please type in postal codes only')});
+  },[currentPage,filterParams]);
+
+  
 
   const [saved,setSaved]=useState([])
   
@@ -116,14 +131,14 @@ function SearchPage(props) {
   return false;
   }
   return<><NavBar isLoggedIn={loggedIn}/>
-  <Filter/>
+  <Filter handleSearch={handleFilterSearch}/>
   <div className="big-card-container">
     <div ref={overlay} className="overlay"></div>
   {data?<div className="card-container">
      {data.animals.map(element=><Card location={element.contact.address.city+", "+element.contact.address.state+" "+element.contact.address.postcode} breed={element.breeds.primary} image={element.primary_photo_cropped?element.primary_photo_cropped.medium:null} isSaved={checkSave(element.id)} unsave={handleUnsave} save={handleSave} key={element.id} loggedIn={loggedIn} handleShowRequest={handleShowRequest} data={element}></Card>)}
   </div>:<Spinner/>}
   {showRequest&&<RequestLogin closeRequest={handleCloseRequest}/>}
-  {data&&<Pagination jumpPage={(page)=>{
+  {data&&<Pagination totalPages={data.pagination.total_pages} jumpPage={(page)=>{
     setCurrentPage(page)
     navigate('/search/'+page)
   }} currentPage={currentPage} nextPage={()=>{

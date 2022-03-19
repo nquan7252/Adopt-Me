@@ -7,16 +7,21 @@ function Pagination(props) {
         setCurrentPage(props.currentPage)
     },[props.currentPage])
     var firstElement=currentPage>=4?currentPage-2:1;
-    var lastElement=currentPage>=4?currentPage+2:5;
+    if (props.totalPages<=5){
+        var lastElement=props.totalPages;
+    }
+    else{
+        var lastElement=currentPage>=4?(currentPage+2<=props.totalPages?currentPage+2:props.totalPages):5;
+    }
     var pageArray=[];
     for (let i=firstElement;i<=lastElement;i++){
         pageArray.push(i)
     }
     return <div className='pagination'>
-                {currentPage>=2&&<img src={require('../Assets/arrowleft.png')} onClick={props.prevPage}></img>}
+        {currentPage>=2&&<img src={require('../Assets/arrowleft.png')} onClick={props.prevPage}></img>}
         {/* <div>{currentPage}</div> */}
         {pageArray.map(element=><div id={currentPage==element?'activepage':''} key={element} onClick={()=>props.jumpPage(element)}>{element}</div>)}
-        <img src={require('../Assets/arrowright.png')} onClick={props.nextPage}></img>
+        {currentPage<props.totalPages&&<img src={require('../Assets/arrowright.png')} onClick={props.nextPage}></img>}
     
     </div>;
 }

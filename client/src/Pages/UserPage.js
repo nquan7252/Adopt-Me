@@ -25,13 +25,15 @@ function UserPage() {
         e=='profile'?setActive('profile'):setActive('favorites');
     }
     const [showUnsaveSuccess,setShowUnsaveSuccess]=useState(false)
-    const [loggedIn, setLoggedIn] = useState(null);
-  //consider changeing this to state
-    useEffect(() => {
-    isLoggedIn()
-      .then(() => setLoggedIn(true))
-      .catch(() => setLoggedIn(false));
-  }, []);
+    const [loggedIn, setLoggedIn] = useState(async()=>{
+        axios.get('http://localhost:3001/avatar',{headers:{
+          authorization:'Bearer '+localStorage.getItem('AccessToken')
+        }})
+          .then((res) => setLoggedIn(res.data))
+          .catch((err) => {
+            console.log(err.response.data);
+            setLoggedIn(false)});
+      });
   const handleSave=(data)=>{
     setSaved(prev=>[...prev,String(data.id)]);
     axios.get('http://localhost:3001/save',{headers:{

@@ -5,6 +5,7 @@ import NavBar from "../Components/NavBar";
 import axios from "axios";
 import isLoggedIn from "../Helper/isLoggedIn";
 import Contact from "../Components/Contact";
+import $ from 'jquery'
 function HomePage() {
   const child1=useRef();
   const checkLogIn = () => {
@@ -39,7 +40,7 @@ function HomePage() {
     else window.location.href = "https://miwa.sbs/";
   };
   const showSearch=()=>{
-    child1.current.style.display="flex";
+    $('#searchForm').slideToggle()
   }
   return (
     <div>

@@ -62,17 +62,26 @@ const search = (res,url,tokenn) => {
   }).then(result=>{
     console.log('hooray, result is here')
     return res.json(result.data)}).catch(async (err)=>{
-      console.log(err)
+      console.log('ERROR IS',err)
+      if (err=='Error: Request failed with status code 401'){
       console.log('getting new token')
       var newToken=await getNewToken();
       console.log('token method executed',newToken)
-     return search(res,url,newToken)});
+     return search(res,url,newToken)}
+     else res.status(403).send('something is wrong')
+    });
 };
 app.use(express.json());
 app.use(cors());
 app.get("/search/:page", (req, res) => {
   let page=req.params.page;
-  let URL = `https://api.petfinder.com/v2/animals?page=${page}&limit=100`;
+  let location=req.query.location!=''?'&location='+req.query.location:'';
+  let type=req.query.type!=''?'&type='+req.query.type:'';
+  let coat=req.query.coat!=''?'&coat='+req.query.coat:'';
+  let color=req.query.color!=''?'&color='+req.query.color:'';
+  let gender=req.query.gender!=''?'&gender='+req.query.gender:'';
+  console.log(location,type,coat,color,gender);
+  let URL = `https://api.petfinder.com/v2/animals?&page=${page}&limit=100${location+type+coat+color+gender}`;
     search(res,URL,token);
 })
 app.get("/test", (req, res) => {
