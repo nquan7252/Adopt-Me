@@ -28,7 +28,7 @@ function Contact() {
               <a href='https://www.linkedin.com/in/quan-nguyen-299a3a224/' target='_blank'>
               <img src={require('../Assets/linkedin.png')}/>
               </a>
-              <a href='/' target='_blank'>
+              <a href='https://www.instagram.com/_mquannn_/' target='_blank'>
               <img src={require('../Assets/instagram.png')}/>
               </a>
           </div>

@@ -19,6 +19,11 @@ function SearchPage(props) {
   const [searchParams,setSearchParams]=useSearchParams()
 
   console.log(searchParams.get("num"))
+  const [para,setPara]=useState({location:searchParams.get('location'),
+  type:searchParams.get('type'),
+  coat:searchParams.get('coat'),
+  color:searchParams.get('color'),
+  gender:searchParams.get('gender')})
   //consider changing this to get avatar faster
   // const [loggedIn, setLoggedIn] = useState(()=>{
   //   isLoggedIn()
@@ -43,7 +48,9 @@ function SearchPage(props) {
   const handleFilterSearch=(info)=>{
     //axios.get('http://localhost:3001/search/1')
     //set params
-    setfilterParams(info)
+    let queryparam=`location=${info.location}&type=${info.type}&color=${info.color}&coat=${info.coat}&gender=${info.gender}`
+   // props.navigation.push('/search/1?'+queryparam)
+   window.location.href='/search/1?'+queryparam;
   }
   const handleShowRequest=()=>{
     setShowRequest(true);
@@ -92,13 +99,13 @@ function SearchPage(props) {
   const [data, setData] = useState(null);
   useEffect(() => {
     console.log('hereeee',currentPage)
-    axios.get(`http://localhost:3001/search/${currentPage}`,{params:filterParams}).then((res) =>{console.log(res.data) 
+    axios.get(`http://localhost:3001/search/${currentPage}`,{params:para}).then((res) =>{console.log(res.data) 
     setData(res.data)
   }
     ).catch(err=>{
       setfilterParams({location:'',type:'',coat:'',color:'',gender:''})
       alert('Invalid input, please type in postal codes only')});
-  },[currentPage,filterParams]);
+  },[currentPage]);
 
   
 
@@ -140,13 +147,13 @@ function SearchPage(props) {
   {showRequest&&<RequestLogin closeRequest={handleCloseRequest}/>}
   {data&&<Pagination totalPages={data.pagination.total_pages} jumpPage={(page)=>{
     setCurrentPage(page)
-    navigate('/search/'+page)
+    window.location.href=`/search/${page}?location=${para.location}&type=${para.type}&coat=${para.coat}&color=${para.color}&gender=${para.gender}`
   }} currentPage={currentPage} nextPage={()=>{
     setCurrentPage(Number(currentPage)+1);
-    navigate('/search/'+(Number(currentPage)+1))
+    window.location.href=`/search/${Number(currentPage)+1}?location=${para.location}&type=${para.type}&coat=${para.coat}&color=${para.color}&gender=${para.gender}`
 }} prevPage={()=>{
   setCurrentPage(Number(currentPage)-1);
-  navigate('/search/'+(Number(currentPage)-1))
+  window.location.href=`/search/${Number(currentPage)-1}?location=${para.location}&type=${para.type}&coat=${para.coat}&color=${para.color}&gender=${para.gender}`
 }}/>}
   </div>
   </> 

@@ -11,7 +11,8 @@ function Pagination(props) {
         var lastElement=props.totalPages;
     }
     else{
-        var lastElement=currentPage>=4?(currentPage+2<=props.totalPages?currentPage+2:props.totalPages):5;
+        var lastElement=currentPage>=4?(Number(currentPage)+2<=props.totalPages?Number(currentPage)+2:props.totalPages):5;
+        console.log('last element is',lastElement)
     }
     var pageArray=[];
     for (let i=firstElement;i<=lastElement;i++){

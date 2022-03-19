@@ -11,11 +11,15 @@ function ImageSlider(props) {
     const [currentImg,setCurrentImg]=useState(0);
     return <div className='image-slider-container'>
         <div className='image-slider' style={{transform:`translateX(-${currentImg*100}%)`}}>
-        {images.map((element,index)=><img src={element.full}></img>)}
+        {images.length!=0?images.map((element,index)=><img src={element.full}></img>):<img src={require('../Assets/noImage.png')}></img>}
+        {props.videos.length>=1&&<>{props.videos.embed}</>}
         </div>
-        <img src={require('../Assets/arrowright.png')} onClick={()=>setCurrentImg(currentImg==images.length-1?0:currentImg+1)}></img>
-        <img src={require('../Assets/arrowleft.png')} onClick={()=>setCurrentImg(currentImg==0?images.length-1:currentImg-1)}></img>
-        <ImageIndex length={images.length} handleClick={setActive} active={currentImg}/>
+        
+        {images.length!=0&&<img src={require('../Assets/arrowright.png')} onClick={()=>setCurrentImg(currentImg==images.length-1?0:currentImg+1)}></img>}
+        {images.length!=0&&<img src={require('../Assets/arrowleft.png')} onClick={()=>setCurrentImg(currentImg==0?images.length-1:currentImg-1)}></img>}
+        {images.length!=0&&<ImageIndex length={images.length} handleClick={setActive} active={currentImg}/>}
+
+    
     </div>;
 }
 

@@ -20,15 +20,18 @@ function PetProfile() {
          setData(result.data.animal);
       })
     }});
-    const [loggedIn, setLoggedIn] = useState(null);
-  useEffect(() => {
-    isLoggedIn()
-      .then(() => setLoggedIn(true))
-      .catch(() => setLoggedIn(false));
-  }, []);
+    const [loggedIn, setLoggedIn] = useState(()=>{
+      axios.get('http://localhost:3001/avatar',{headers:{
+        authorization:'Bearer '+localStorage.getItem('AccessToken')
+      }})
+        .then((res) => setLoggedIn(res.data))
+        .catch((err) => {
+          console.log(err.response.data);
+          setLoggedIn(false)});
+    });
     return <div>
         <NavBar isLoggedIn={loggedIn}/>
-        {data&&<ImageSlider images={data.photos}/>}
+        {data&&<ImageSlider images={data.photos} videos={data.videos}/>}
         </div>;
 }
 

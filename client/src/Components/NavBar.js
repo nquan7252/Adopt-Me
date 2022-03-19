@@ -34,7 +34,7 @@ function NavBar(props) {
           <Link to="/">
             <span>Home</span>
           </Link>
-          <Link to="/search/1">
+          <Link to="/search/1?location=&#38;type=&#38;coat=&#38;color=&#38;gender=">
             <span>Find a pet</span>
           </Link>
           <span>Contact</span>

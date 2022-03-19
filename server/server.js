@@ -80,7 +80,7 @@ app.get("/search/:page", (req, res) => {
   let coat=req.query.coat!=''?'&coat='+req.query.coat:'';
   let color=req.query.color!=''?'&color='+req.query.color:'';
   let gender=req.query.gender!=''?'&gender='+req.query.gender:'';
-  console.log(location,type,coat,color,gender);
+  console.log(" all info is",location,type,coat,color,gender);
   let URL = `https://api.petfinder.com/v2/animals?&page=${page}&limit=100${location+type+coat+color+gender}`;
     search(res,URL,token);
 })
