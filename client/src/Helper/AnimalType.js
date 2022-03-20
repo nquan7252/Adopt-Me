@@ -86,7 +86,7 @@ export const types={
             "White"
           ],
     },
-    small_furry:{
+    'small-furry':{
         coats: [
             "Hairless",
             "Short",
@@ -165,7 +165,7 @@ export const types={
           "Yellow"
         ],
     },
-    scale_fin:{
+    'scales-fins-other':{
         "coats": [
         
         ],

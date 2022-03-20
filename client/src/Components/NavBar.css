@@ -70,3 +70,57 @@
 .dropdown img{
     margin:auto 0
 }
+.menu-hamburger{
+    display:none;
+}
+.menu-hamburger img{
+    width:20px;
+    height:20px;
+}
+.menu-hamburger-content{
+    display:none;
+    width: 100vw;
+    height:100vh;
+    overflow: hidden;
+    background-color:#1f173d ;
+    top:0;
+    left:0;
+    position:fixed;
+}
+.menu-hamburger-content img{
+    width: 20px;
+    height:20px;
+    filter: invert(1);
+    position: absolute;
+    top:0;
+    right:0;
+    margin:30px 30px;
+}
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+#root{
+    position: relative;
+}
+@media (max-width:890px){
+    .middle-content span{
+        margin-left: 25px;
+    }
+}
+@media (max-width:800px){
+    .menu-container{
+        display:none;
+    }
+    .menu-hamburger{
+        display:block;
+
+    }
+    .menu-hamburger-content{
+    }
+    
+}

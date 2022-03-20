@@ -6,8 +6,10 @@ import axios from "axios";
 import isLoggedIn from "../Helper/isLoggedIn";
 import Contact from "../Components/Contact";
 import $ from 'jquery'
+import { useNavigate } from "react-router-dom";
 function HomePage() {
   const child1=useRef();
+  const navigate=useNavigate()
   const checkLogIn = () => {
     axios
       .get("http://localhost:3001/authenticate", {
@@ -37,7 +39,7 @@ function HomePage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (e.target[0].value.length != 5) alert("Please input a valid zip code");
-    else window.location.href = "https://miwa.sbs/";
+    else navigate(`/search/1?location=${e.target[0].value}&type=&coat=&color=&gender=`)
   };
   const showSearch=()=>{
     $('#searchForm').slideToggle()

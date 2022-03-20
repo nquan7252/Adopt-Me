@@ -283,3 +283,29 @@ h1{
       transform:translateY(0)
     }
 }
+@media (max-width:1385px){
+  #dog{
+    min-width: 50%;
+    width:100vw;
+  }
+}
+@media (max-width:1298px){
+  .animal{
+    flex-direction: column-reverse;
+  }
+  .img-container{
+    padding:0 0 !important;
+    align-items: center;
+    justify-content: center;
+  }
+  .img-container img{
+  
+    margin-top: 100px;
+  }
+  .img-container img:nth-child(4){
+    transform: translate(100px,50px);
+  }
+  .img-container img:nth-child(5){
+    transform: translate(90px,50px);
+  }
+}

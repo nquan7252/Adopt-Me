@@ -6,6 +6,7 @@ import isLoggedIn from '../Helper/isLoggedIn';
 import { useEffect } from 'react';
 import ImageSlider from'../Components/ImageSlider'
 import axios from 'axios'
+import './PetProfile.css'
 function PetProfile() {
     const location=useLocation();
     const [data,setData]=useState(()=>{
@@ -32,6 +33,11 @@ function PetProfile() {
     return <div>
         <NavBar isLoggedIn={loggedIn}/>
         {data&&<ImageSlider images={data.photos} videos={data.videos}/>}
+        <div className='pet-info'>
+          <h1>{data.name}</h1>
+          <span>Breed: {data.breeds.primary}</span>
+          <div><img src={require('../Assets/location.png')}></img>Location: {data.contact.address.address1}, {data.contact.address}</div>
+        </div>
         </div>;
 }
 

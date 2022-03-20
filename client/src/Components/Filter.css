@@ -58,7 +58,23 @@ select{
     border-radius: 7px;
     padding:10px;
   }
-form input{
-  
+.filter form input{
+    padding:10px 5px;
 
+}
+@media (max-width:860px){
+    .filter form{
+        padding:0 10px;
+    }
+    .primary-search input:first-child{
+        width:70%
+    }
+    .primary-search input:nth-child(2){
+       width: 30%;
+    }
+    .filter{
+        margin-left:0;
+        margin-right: 0;
+        padding:0 10px;
+    }
 }

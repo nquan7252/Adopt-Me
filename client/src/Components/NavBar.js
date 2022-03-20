@@ -1,15 +1,25 @@
-import React, { Component, useEffect } from "react";
+import React, { Component, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import $ from 'jquery'
 function NavBar(props) {
   const navigate=useNavigate();
   const currentLocation = useLocation();
-  const [img,setImg]=useState(null)
-
+  const [img,setImg]=useState(null);
+  const menuToggle=useRef();
+  const openMenu=()=>{
+    $('.menu-hamburger-content').fadeIn()
+    menuToggle.current.style.zIndex='10001'
+    document.querySelector('body').style.overflow = 'hidden';
+  }
+  const closeMenu=()=>{
+    $('.menu-hamburger-content').fadeOut()
+    document.querySelector('body').style.overflow = 'visible';
+  }
   // useEffect(()=>{
   //   console.log('fetching avba',props.isLoggedIn)
   //   if (props.isLoggedIn){
@@ -29,6 +39,16 @@ function NavBar(props) {
       <Link to="/">
         <img src={require("../Assets/logo.png")}></img>
       </Link>
+      <div className="menu-hamburger">
+          <img  onClick={openMenu} src={require('../Assets/meat.png')}></img>
+      </div>
+      <div ref={menuToggle} className="menu-hamburger-content">
+        <img onClick={closeMenu} src={require('../Assets/delete.png')}></img>
+        <Link to='/'>Home</Link>
+        <Link to="/search/1?location=&#38;type=&#38;coat=&#38;color=&#38;gender=">Find a pet</Link>
+
+        <Link to='/'>Contact</Link>
+      </div>
       <div className="menu-container">
         <div className="middle-content">
           <Link to="/">

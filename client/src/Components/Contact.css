@@ -52,3 +52,38 @@
     color:gray;
     padding-left: 5px;
 }
+.logo-container{
+    width: max-content;
+}
+@media (max-width:1111px){
+    .logo-container{
+        width: 100%;
+        display: block;
+        text-align: center;
+
+    }
+    .contact{
+        padding: 30px 20px;
+        font-size: 0.8em;
+    
+        flex-wrap: wrap;
+    }
+    .about{
+        max-width: 500px;
+        margin-top: 50px;
+    }
+    .about p{
+        line-height: 20px;
+        margin-top: 5px;
+    }
+    .info{
+        margin-top: 20px;
+    }
+    #attribute{
+        left:50%;
+        
+        transform: translate(-50%,0);
+        width: 100%;
+        text-align: center;
+    }
+}

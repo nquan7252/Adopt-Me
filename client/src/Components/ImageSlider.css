@@ -23,7 +23,7 @@
     background-color: aqua;
 }
 .image-slider img{
-    padding:0 500px;
+    padding:0 30%;
     object-fit: cover;
 }
 .image-slider-container>img{
@@ -42,4 +42,9 @@
 
 .image-slider-container>img:nth-child(2){
     right: 0;
+}
+@media (max-width:1400px) {
+    .image-slider img{
+        padding: 0 20%;
+    }
 }

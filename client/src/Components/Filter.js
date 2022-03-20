@@ -49,10 +49,10 @@ function Filter(props) {
                     <option selected={par.get('type')=='dog'?'selected':''} value='dog'>Dog</option>
                     <option selected={par.get('type')=='cat'?'selected':''} value='cat'>Cat</option>
                     <option selected={par.get('type')=='rabbit'?'selected':''} value='rabbit'>Rabbit</option>
-                    <option selected={par.get('type')=='small_furry'?'selected':''} value='small_furry'>Small &#38; Furry</option>
+                    <option selected={par.get('type')=='small-furry'?'selected':''} value='small-furry'>Small &#38; Furry</option>
                     <option selected={par.get('type')=='horse'?'selected':''} value='horse'>Horse</option>
                     <option selected={par.get('type')=='bird'?'selected':''} value='bird'>Bird</option>
-                    <option selected={par.get('type')=='scale_fin'?'selected':''} value='scale_fin'>Scale, Fins &#38; Other</option>
+                    <option selected={par.get('type')=='scales-fins-other'?'selected':''} value='scales-fins-other'>Scales, Fins &#38; Other</option>
                     <option selected={par.get('type')=='barnyard'?'selected':''} value='barnyard'>Barnyard</option>
                 </select>
                 <select>
