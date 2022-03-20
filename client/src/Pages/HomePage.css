@@ -275,6 +275,27 @@ h1{
   left:50%;
   transform: translate(-40%,-70px);
 }
+.page3{
+  display:flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.page3 div{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin:50px 0;
+}
+.page3 div div{
+  display: block;
+}
+.page3 div img{
+  width:80px;
+  height:80px;
+  margin:0 20px;
+}
 @keyframes slideDown {
     from{
       transform: translateY(-30px);

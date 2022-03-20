@@ -98,6 +98,36 @@ function HomePage() {
             </div>
           </div>
       </section>
+      <section className="page3">
+        <div>
+          <img src={require('../Assets/animalcare.png')}></img>
+          <div>
+            <h4>Dedicated to save animals</h4>
+            <p>A space where we love the animals and so can you, scroll through a variety of pets and pick one of your favorites </p>
+          </div>
+        </div>
+        <div>
+          <img src={require('../Assets/heartpaw.png')}></img>
+          <div>
+            <h4>Accurate and live data</h4>
+            <p>Our data is updated every hour</p>
+          </div>
+        </div>
+        <div>
+          <img src={require('../Assets/free.png')}></img>
+          <div>
+            <h4>Cost-free, quick and easy to use</h4>
+            <p>No credit card or subscription required. However, there will be adoption fees that vary from shelter to shelter</p>
+          </div>
+        </div>
+        <div>
+          <img src={require('../Assets/security-shield.png')}></img>
+          <div>
+            <h4>Trust-worthy and safe</h4>
+            <p>Our data is collected through a trust-worthy network of animal shelters across the United States</p>
+          </div>
+        </div>
+      </section>
   
     </div>
   );

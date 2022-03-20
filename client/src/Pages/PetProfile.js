@@ -36,7 +36,7 @@ function PetProfile() {
         <div className='pet-info'>
           <h1>{data.name}</h1>
           <span>Breed: {data.breeds.primary}</span>
-          <div><img src={require('../Assets/location.png')}></img>Location: {data.contact.address.address1}, {data.contact.address}</div>
+          <div><img src={require('../Assets/location.png')}></img>Location: {data.contact.address.address1&&data.contact.address.adress1+','} {data.contact.address.city}, {data.contact.address.state} {data.contact.address.postcode}</div>
         </div>
         </div>;
 }
