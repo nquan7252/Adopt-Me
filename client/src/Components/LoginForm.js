@@ -24,7 +24,9 @@ function LoginForm(props) {
         <button>SIGN IN</button>
     </form>
     <div id='other-actions'>
+        <Link to='/reset-password'>
         <span>Forgot Password?</span>
+        </Link>
         <Link to='/signup'>
         <span style={{cursor:'pointer'}}>Sign up</span>
         </Link>

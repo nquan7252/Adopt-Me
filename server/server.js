@@ -139,7 +139,7 @@ app.post('/reset-password',(req,res)=>{
         to:result[0].username,
         subject:"Adopt Me Password Reset",
         message:"You have just requested a password reset for your account. Please follow the link below to reset your password",
-        html:`<a href="http://localhost:3001/reset-password/${accessToken}">Reset password</a>`
+        html:`<a href="http://localhost:3000/reset-password/${accessToken}">Reset password</a>`
       }
       sengrid.send(message).then(()=>console.log('email sent')).catch(console.log)
       }
@@ -159,15 +159,11 @@ app.put('/reset-password-next',(req,res)=>{
   var newPassword=req.body.newPassword;
   jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,user)=>{
     if (err) return res.status(401).send('Token no longer valid - no access')
-    con.query(updatePasswordQuery,[newPassword,user.username],(err,result)=>{
+    con.query(updatePasswordQuery,[newPassword,user[0].username],(err,result)=>{
       if (err) console.log(err);
       else 
         console.log('idk what to put here');
-    })
-
-
-
-    
+    })   
   })
 })
 app.get('/save',savedAuthToken,(req,res)=>{

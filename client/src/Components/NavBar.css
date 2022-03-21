@@ -86,6 +86,15 @@
     top:0;
     left:0;
     position:fixed;
+    padding-top: 100px;
+    padding-left: 50px;
+}
+.menu-hamburger-content a{
+    color:white;
+    font-size: 3em;
+}
+.menu-hamburger-content div{
+    margin:30px 0;
 }
 .menu-hamburger-content img{
     width: 20px;
@@ -106,6 +115,9 @@
 }
 #root{
     position: relative;
+}
+#fade1,#fade2,#fade3,#fade4,#fade5{
+    display: none;
 }
 @media (max-width:890px){
     .middle-content span{

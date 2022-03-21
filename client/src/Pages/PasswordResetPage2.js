@@ -3,20 +3,23 @@ import React, { Component, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 function PasswordResetPage2() {
     const handleSubmit=(e)=>{
+        console.log(para)
         e.preventDefault();
-        axios.post('http://localhost:3001/reset-password',{username:e.target[0].value}).then(console.log).catch(console.log)
+        console.log('new password is',e.target[0].value)
+        axios.put('http://localhost:3001/reset-password-next',{newPassword:e.target[0].value,token:para.token}).then(console.log).catch(console.log)
     }
-    const params=useParams();
-    console.log(params);
+    const para=useParams();
+    console.log(para);
     const [valid,setValid]=useState(()=>{
         axios.get('http://localhost:3001/authenticate',{headers:{
-            Authorization:'Bearer '+params.token
+            Authorization:'Bearer '+para.token
         }}).then(()=>setValid(true)).catch(()=>setValid(false))
     })
     return valid?<div>
+        <h3>whiehriwhe</h3>
         <form onSubmit={handleSubmit}>
     <input type='text'></input>
-    <button></button>
+    <input type='submit' value='hi'></input>
 </form></div>:<div>Invalid token</div>
     
     

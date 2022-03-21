@@ -6,6 +6,7 @@ import axios from "axios";
 import isLoggedIn from "../Helper/isLoggedIn";
 import Contact from "../Components/Contact";
 import $ from "jquery";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 function HomePage() {
   const child1 = useRef();
@@ -119,6 +120,9 @@ function HomePage() {
               animals in needs get a better home. This service acts as an
               intermediary connection between our clients and animal shelters.
             </p>
+            <Link to="/search/1?location=&#38;type=&#38;coat=&#38;color=&#38;gender=">            
+            <span>Find me a pet</span>
+            </Link>
           </div>
         </div>
       </section>

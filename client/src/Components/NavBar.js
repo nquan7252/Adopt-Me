@@ -13,11 +13,22 @@ function NavBar(props) {
   const menuToggle=useRef();
   const openMenu=()=>{
     $('.menu-hamburger-content').fadeIn()
+    $('#fade1').fadeIn(500);
+    $('#fade2').delay(200).fadeIn(500);
+    $('#fade3').delay(400).fadeIn(500);
+    $('#fade4').delay(600).fadeIn(500);
+    $('#fade5').delay(800).fadeIn(500);
+
     menuToggle.current.style.zIndex='10001'
     document.querySelector('body').style.overflow = 'hidden';
   }
   const closeMenu=()=>{
     $('.menu-hamburger-content').fadeOut()
+    $('#fade1').hide();
+    $('#fade2').hide();
+    $('#fade3').hide();
+    $('#fade4').hide();
+    $('#fade5').hide();
     document.querySelector('body').style.overflow = 'visible';
   }
   // useEffect(()=>{
@@ -44,10 +55,16 @@ function NavBar(props) {
       </div>
       <div ref={menuToggle} className="menu-hamburger-content">
         <img onClick={closeMenu} src={require('../Assets/delete.png')}></img>
-        <Link to='/'>Home</Link>
-        <Link to="/search/1?location=&#38;type=&#38;coat=&#38;color=&#38;gender=">Find a pet</Link>
-
-        <Link to='/'>Contact</Link>
+        <div id='fade1'><Link to='/'><img src={require('../Assets/homeicon.png')}></img>Home</Link></div>
+        <div id='fade2'><Link to="/search/1?location=&#38;type=&#38;coat=&#38;color=&#38;gender=">Find a pet</Link></div>
+        <div id='fade3'><Link to='/'>Contact</Link></div>
+        {!props.isLoggedIn?<>
+          <div id='fade4'><Link to='/'>Login</Link></div>
+          <div id='fade5'><Link to='/'>Sign up</Link></div>
+    
+        </>:<><div id='fade4'><Link to='/'>My Profile</Link></div>
+        <div id='fade5'><Link to='/'>Logout</Link></div>
+        </>}
       </div>
       <div className="menu-container">
         <div className="middle-content">
