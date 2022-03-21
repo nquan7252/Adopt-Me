@@ -55,15 +55,15 @@ function NavBar(props) {
       </div>
       <div ref={menuToggle} className="menu-hamburger-content">
         <img onClick={closeMenu} src={require('../Assets/delete.png')}></img>
-        <div id='fade1'><Link to='/'><img src={require('../Assets/homeicon.png')}></img>Home</Link></div>
-        <div id='fade2'><Link to="/search/1?location=&#38;type=&#38;coat=&#38;color=&#38;gender=">Find a pet</Link></div>
-        <div id='fade3'><Link to='/'>Contact</Link></div>
+        <div id='fade1'><Link onClick={closeMenu} to='/'><img src={require('../Assets/homeicon.png')}></img><span>Home</span></Link></div>
+        <div id='fade2'><Link onClick={closeMenu} to="/search/1?location=&#38;type=&#38;coat=&#38;color=&#38;gender="><img src={require('../Assets/pawprint.png')}></img><span>Find a pet</span></Link></div>
+        <div id='fade3'><Link onClick={closeMenu} to='/'><img src={require('../Assets/about.png')}/><span>About us</span></Link></div>
         {!props.isLoggedIn?<>
-          <div id='fade4'><Link to='/'>Login</Link></div>
-          <div id='fade5'><Link to='/'>Sign up</Link></div>
+          <div id='fade4'><Link onClick={closeMenu} to='/'><img src={require('../Assets/log-in.png')}></img><span>Login</span></Link></div>
+          <div id='fade5'><Link onClick={closeMenu} to='/'><img src={require('../Assets/signup.png')}></img><span>Sign up</span></Link></div>
     
-        </>:<><div id='fade4'><Link to='/'>My Profile</Link></div>
-        <div id='fade5'><Link to='/'>Logout</Link></div>
+        </>:<><div id='fade4'><Link onClick={closeMenu} to='/'>My Profile</Link></div>
+        <div id='fade5'><Link onClick={closeMenu} to='/'>Logout</Link></div>
         </>}
       </div>
       <div className="menu-container">

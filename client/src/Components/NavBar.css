@@ -80,7 +80,7 @@
 .menu-hamburger-content{
     display:none;
     width: 100vw;
-    height:100vh;
+    height:110vh;
     overflow: hidden;
     background-color:#1f173d ;
     top:0;
@@ -94,7 +94,7 @@
     font-size: 3em;
 }
 .menu-hamburger-content div{
-    margin:30px 0;
+    margin:80px 0;
 }
 .menu-hamburger-content img{
     width: 20px;
@@ -104,6 +104,19 @@
     top:0;
     right:0;
     margin:30px 30px;
+}
+.menu-hamburger-content span{
+    font-size: 1.2em;
+    font-weight: 400;
+}
+.menu-hamburger-content div img{
+    position: relative;
+    top:10px;
+    object-fit: cover;
+    margin: 0;
+    width: 20px;
+    height:20px;
+    vertical-align:text-top;
 }
 @keyframes fadeIn {
     from{
