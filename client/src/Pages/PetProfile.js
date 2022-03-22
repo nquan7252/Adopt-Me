@@ -81,13 +81,13 @@ function PetProfile() {
         {data&&<div className='pet-info'>
           <div><h1>{data.name}</h1><img src={data.gender=='male'?require('../Assets/male.png'):require('../Assets/female.png')}/></div>
           <span>{data.breeds.primary}</span>
-          <div><img src={require('../Assets/location.png')}></img><span>{data.contact.address.address1&&data.contact.address.address1+','} {data.contact.address.city}, {data.contact.address.state} {data.contact.address.postcode}</span></div>
-          <div><span>Status: </span><span style={data.status=='adoptable'?{color:'green'}:{color:'red'}}> {data.status}</span></div>
-          <div><span>Age: {data.age}</span></div>
-          <div><span>Size: {data.size}</span></div>
-          <div>{data.coat&&<span>Coat: {data.coat}</span>}</div>
+          <div><img src={require('../Assets/location.png')}></img><span style={{fontWeight:700}}>{data.contact.address.address1&&data.contact.address.address1+','} {data.contact.address.city}, {data.contact.address.state} {data.contact.address.postcode}</span></div>
+          <div><span style={{fontWeight:700}}>Status:&nbsp;</span><span style={data.status=='adoptable'?{color:'green'}:{color:'red'}}> {data.status}</span></div>
+          <div><span style={{fontWeight:700}}>Age:&nbsp;</span> <span>{data.age}</span></div>
+          <div><span style={{fontWeight:700}}>Size:&nbsp;</span><span>{data.size}</span></div>
+          {data.coat&&<div><span style={{fontWeight:700}}>Coat:&nbsp;</span><span>{data.coat}</span></div>}
           {data.description&&<div style={{display:'block'}}>
-            <span>Description:</span>
+            <span style={{fontWeight:700}}>Description:</span>
             <p>{data.description}</p>
           </div>}
           <div style={{display:'block'}}>

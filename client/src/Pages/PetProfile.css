@@ -3,17 +3,25 @@
     margin: 50px 0;
 }
 .pet-info img{
-    width: 20px;
-    height:20px;
+    width: 30px;
+    height:30px;
     margin-right:10px;
     vertical-align: middle;
 }
 .pet-info div{
     display: flex;
 }
+.pet-info span{
+    margin:10px 0;
+    font-size: 1.5em;
+}
+.pet-info div span{
+    
+}
 .pet-info>span{
-    font-size: 1.4em;
-    font-weight: 500;
+    font-size: 1.8em;
+    font-weight: 700;
+
 }
 .pet-info div:first-child img{
     position: static;

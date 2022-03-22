@@ -28,6 +28,11 @@
 .active{
     background-color: white!important;
 }
+@media (max-width:660px) {
+    .image-slider img{
+        padding:0;
+    }
+}
 @media (max-width:560px){
     .pagination div{
         padding:5px 20px;
