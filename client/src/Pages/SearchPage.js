@@ -67,11 +67,10 @@ function SearchPage(props) {
     params:{
     animalId:data.id,
     animalName:data.name,
-    animalPhoto:data.photos[0].medium,
+    animalPhoto:data.photos.length>=1?data.photos[0].medium:null,
     animalGender:data.gender,
     animalLocation:data.contact.address.city+", "+data.contact.address.state+" "+data.contact.address.postcode,
     animalBreed:data.breeds.primary
-
 }})
   }
   const handleUnsave=(data)=>{
@@ -85,7 +84,7 @@ function SearchPage(props) {
     params:{
     animalId:data.id,
     animalName:data.name,
-    animalPhoto:data.photos[0].medium,
+    animalPhoto:data.photos.length>=1?data.photos[0].medium:null,
     animalGender:data.gender,
     animalLocation:data.contact.address.city+", "+data.contact.address.state+" "+data.contact.address.postcode,
     animalBreed:data.breeds.primary

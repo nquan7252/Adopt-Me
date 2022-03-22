@@ -2,4 +2,46 @@
     width: 100%;
     min-height: 80vh;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin:50px 0;
 }
+.favorite-section div{
+  
+}
+.favorite-section div button{
+   background-color: #1f173d;
+   color: white;
+   cursor: pointer;
+   font-weight: 500;
+}
+.favorite-section div h3{
+color: #1f173d;
+
+ }
+ .selection-bar{
+     margin-top: 50px;
+ }
+ .selection-bar span{
+     color: #1f173d !important;;
+ }
+ #active::after{
+     background-color: #1f173d!important;
+ }
+ .profile-section div{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin: 50px 0;
+ }
+ .profile-section img{
+     margin:0 50px;
+     cursor: pointer;
+ }
+ @media (max-width:800px) {
+     .selection-bar span{
+         font-size: 1.9em!important;
+         margin:0 20px!important;
+     }
+ }

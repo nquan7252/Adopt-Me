@@ -18,7 +18,7 @@ function LoginPage () {
         console.log(location)
         
     return <div className='page'>
-                {loggedIn?navigate('/user'):<LoginForm from={location.state!=null?location.state.from:'/' }/>} 
+                {loggedIn?navigate('/user',{state:{chosen:'profile'}}):<LoginForm from={location.state!=null?location.state.from:'/' }/>} 
     </div>;
 }
 

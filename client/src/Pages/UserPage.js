@@ -4,13 +4,17 @@ import React, { Component, useState } from 'react';
 import NavBar from '../Components/NavBar';
 import { useEffect } from 'react';
 import Card from '../Components/Card';
+import { Link } from 'react-router-dom';
 import './UserPage.css'
 import isLoggedIn from '../Helper/isLoggedIn';
 import SelectionBar from '../Components/SelectionBar';
 import UnsaveSuccessBanner from '../Components/UnsaveSuccessBanner';
 import { useLocation } from 'react-router-dom';
+import AvatarChooser from '../Components/AvatarChooser';
+import AvatarChanger from '../Components/AvatarChanger';
 function UserPage() {
     const location=useLocation();
+    const [showChangeAva,setShowChangeAva]=useState(false);
     const handleLogout=()=>{
         localStorage.removeItem('AccessToken');
         window.location.href='/logoutSuccess'
@@ -74,6 +78,9 @@ setTimeout(()=>setShowUnsaveSuccess(false),2000)
 })
 
   }
+  const handleChangeAva=()=>{
+    setShowChangeAva(true);
+  }
 const checkSave=(id)=>{
     //CHANGE THIS SINCE ITS AN ARRAY OF OBJECTS 
     if (saved!=null){
@@ -103,16 +110,34 @@ const checkSave=(id)=>{
         window.location.href='/'
     }
 });
-    return<>
+    return <>
+    
     {showUnsaveSuccess&&<UnsaveSuccessBanner/>}
+    
     <NavBar isLoggedIn={loggedIn}/>
     <SelectionBar active={active} onClick={handleSwitch}/>
-     <div>Hello{user?.name}</div>
-     {active=='profile'?<button onClick={handleLogout}>Log out</button>:
+    {showChangeAva&&<AvatarChanger/>}
+     {active=='profile'?<div className='profile-section'>
+         <div>
+             <img src={loggedIn}></img>
+             {user&&<div style={{display:'block'}}>
+                 <h3>{user.name}</h3>
+                <h5>Email: {user.username}</h5>
+                <h5>Saved pets: {saved?saved.length:'0'}</h5>
+                <Link to='/'>Reset password</Link>
+             </div>
+            }
+        </div>
+         <button onClick={handleLogout}>Log out</button>
+         </div>:
      <div className='favorite-section'>
-     {saved?saved.map((element,index)=><Card fromUser={true} location={element.location} breed={element.breed} image={element.photo} isSaved={checkSave(element.id)} unsave={handleUnsave} save={handleSave} key={element.id} loggedIn={loggedIn} data={element}></Card>):<div>Nothing here</div>}
+     {saved?saved.map((element,index)=><Card fromUser={true} location={element.location} breed={element.breed} image={element.photo} isSaved={checkSave(element.id)} unsave={handleUnsave} save={handleSave} key={element.id} loggedIn={loggedIn} data={element}></Card>)
+     :<div><h3>Your list is empty</h3>
+     <Link to="/search/1?location=&#38;type=&#38;coat=&#38;color=&#38;gender="><button>Find a pet</button></Link>
+     </div>}
     </div>
     }
+    
      </>
   }
 

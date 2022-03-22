@@ -95,6 +95,7 @@
 }
 .menu-hamburger-content div{
     margin:80px 0;
+    margin-left: 50px;
 }
 .menu-hamburger-content img{
     width: 20px;
@@ -148,4 +149,17 @@
     .menu-hamburger-content{
     }
     
+}
+@media (max-width:690px){
+    .menu-hamburger-content{
+        padding:0;
+        text-align: center;
+    }
+    .menu-hamburger-content span{
+        font-size: 0.8em;
+    }
+    .menu-hamburger-content img{
+        
+    
+    }
 }

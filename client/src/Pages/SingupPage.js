@@ -10,7 +10,7 @@ function SignupPage() {
     })
     const navigate=useNavigate();
     return <div className='page'>
-        {loggedIn?navigate('/user'):<SignupForm/>} 
+        {loggedIn?navigate('/user',{state:{chosen:'profile'}}):<SignupForm/>} 
         </div>
 }
 

@@ -1,0 +1,33 @@
+.showava{
+    position:fixed;
+    background-color: antiquewhite;
+}
+.showava div{
+    position: absolute;
+    left:50%;
+    transform: ;
+}
+.showava>img{
+    width:30px;
+    height:30px;
+    position:absolute;
+    top:0;
+    right:0;
+    margin: 10px;
+}
+.showava::before{
+    content:'';
+    position: fixed;
+    width:100vw;
+    height:100vh;
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
+    background-color: black;
+    z-index: 100;
+    opacity: 0.6;
+}
+.showava button{
+    color:black;
+}

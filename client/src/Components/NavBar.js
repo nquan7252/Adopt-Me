@@ -44,7 +44,8 @@ function NavBar(props) {
     localStorage.removeItem('AccessToken');
     window.location.href='/'
   }
-  
+  const location=useLocation();
+  console.log('search page location is',location)
   return (
     <div className="navbar">
       <Link to="/">
@@ -59,11 +60,11 @@ function NavBar(props) {
         <div id='fade2'><Link onClick={closeMenu} to="/search/1?location=&#38;type=&#38;coat=&#38;color=&#38;gender="><img src={require('../Assets/pawprint.png')}></img><span>Find a pet</span></Link></div>
         <div id='fade3'><Link onClick={closeMenu} to='/'><img src={require('../Assets/about.png')}/><span>About us</span></Link></div>
         {!props.isLoggedIn?<>
-          <div id='fade4'><Link onClick={closeMenu} to='/'><img src={require('../Assets/log-in.png')}></img><span>Login</span></Link></div>
-          <div id='fade5'><Link onClick={closeMenu} to='/'><img src={require('../Assets/signup.png')}></img><span>Sign up</span></Link></div>
+          <div id='fade4'><Link onClick={closeMenu} to="/login" state={{ from: window.location.pathname+window.location.search }}><img src={require('../Assets/log-in.png')}></img><span>Login</span></Link></div>
+          <div id='fade5'><Link onClick={closeMenu} to="/signup" state={{ from: window.location.pathname+window.location.search }}><img src={require('../Assets/signup.png')}></img><span>Sign up</span></Link></div>
     
-        </>:<><div id='fade4'><Link onClick={closeMenu} to='/'>My Profile</Link></div>
-        <div id='fade5'><Link onClick={closeMenu} to='/'>Logout</Link></div>
+        </>:<><div id='fade4'><Link onClick={closeMenu} Link to='/user' state={{chosen:'profile'}}><img src={require('../Assets/profile.png')}></img><span>My Profile</span></Link></div>
+        <div id='fade5'><Link onClick={logOut} to='/'><img src={require('../Assets/exit.png')}></img><span>Logout</span></Link></div>
         </>}
       </div>
       <div className="menu-container">
@@ -78,10 +79,10 @@ function NavBar(props) {
         </div>
         {!props.isLoggedIn ? (
           <div className="login-signup">
-            <Link to="/login" state={{ from: window.location.pathname }}>
+            <Link to="/login" state={{ from: window.location.pathname+window.location.search }}>
               <span id="login">Login</span>
             </Link>
-            <Link to="/signup" state={{ from: window.location.pathname }}>
+            <Link to="/signup" state={{ from: window.location.pathname+window.location.search }}>
               <span>Sign up</span>
             </Link>
           </div>

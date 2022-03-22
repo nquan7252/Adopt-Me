@@ -8,12 +8,12 @@ function RequestLogin(props) {
             You must login first to use this feature.   
         </h4>
         <div>
-        <Link to='/login' state={{ from: window.location.pathname }}>
+        <Link to='/login' state={{ from: window.location.href }}>
             Login
         </Link>
         <span> or </span>
         <Link to='/signup'>
-            Signup
+            Signup 
         </Link>
         </div>
         <img src={require('../Assets/delete.png')} onClick={()=>props.closeRequest()}></img>
