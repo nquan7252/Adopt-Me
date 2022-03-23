@@ -91,7 +91,8 @@ function PetProfile() {
             <p>{data.description}</p>
           </div>}
           <div style={{display:'block'}}>
-          <h3>Contact</h3>
+          <span style={{fontWeight:700}}>Contact</span>
+          <br/>
           <a href={`mailto:${data.contact.email}`}>{data.contact.email}</a>
           <br/>
           <a href={`tel:${data.contact.phone}`}>{data.contact.phone}</a>

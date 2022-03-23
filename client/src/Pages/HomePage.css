@@ -222,6 +222,9 @@ h1{
   height:100vh;
   background-image: url('../Assets/background2.png');
   background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .page2::before{
   content: "";
@@ -255,13 +258,17 @@ h1{
 }
 .animal{
   display: flex;
+  border-radius: 20px;
   justify-content: space-around;
-  padding-top: 100px;
+  margin:0 50px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 8px black;
 }
 .animal>div:last-child{
   padding:0 70px;
   line-height: 30px;
-  width: 50%;
+  width: 40%;
+  margin:auto 0;
 }
 .animal img{
   width:200px;
@@ -299,7 +306,6 @@ h1{
   transform: rotate(-30deg);
 }
 .animal img:nth-child(1){
-  transform: translate(20px,-20px);
 }
 .animal img:nth-child(2){
   transform: translate(0,20px);
@@ -323,15 +329,15 @@ h1{
   height:50px;
 }
 .left{
-  display:flex;
-  flex-wrap: wrap;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 50px;
   align-items: center;
-  justify-content: space-evenly;
-  width: 50%;
+  width: 60%;
   padding: 50px 50px;
 }
 .left>div{
-  width: 40%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -352,7 +358,8 @@ h1{
   border: none;
   width:80px;
   height:80px;
-  margin:0 50px;
+  margin:0 20px;
+  margin-left: 0;
 }
 .left p{
   font-size: 0.8em;
@@ -383,32 +390,36 @@ h1{
     min-width: 50%;
     width:100vw;
   }
-}
-@media (max-width:1298px){
   .animal{
+    font-size: 13px;
+  }
+}
+@media (max-width:1220px) {
+  .animal{
+    display: flex;
     flex-direction: column-reverse;
   }
-  .animal div:last-child{
-    padding: 0 150px;
+  .animal>div{
+    width: 100%!important;
   }
-  .img-container{
-    padding:0 0 !important;
-    align-items: center;
-    justify-content: center;
+  .animal>div:last-child{
+    margin:50px
   }
-  .img-container img{
-  
-    margin-top: 100px;
+  .left{
+    padding-top: 0;
   }
-  .img-container img:nth-child(4){
-    transform: translate(100px,50px);
+  .left div{
+    margin:10px
   }
-  .img-container img:nth-child(5){
-    transform: translate(90px,50px);
-  }
-  @media (max-width:900px) {
+}
+@media (max-width:864px) {
     #root{
       font-size: 11px;
+    }
+    .left{
+      column-gap: 10px;
+      padding-left: 10px;
+      padding-right:10px;
     }
   }
   @media (max-width:800px) {
@@ -438,4 +449,18 @@ h1{
         width:30%;
       }
   }
-}
+  @media (max-width:750px) {
+    .animal{
+      font-size: 10px;
+    }
+    h1::before{
+      width: 50px !important;;
+  height: 50p!important;
+  left: -100px !important;;
+  top:-15px;
+    }
+    .left img{
+      width: 40px!important;
+    height: 40px!important;
+  margin: 0 !important;    }
+  }

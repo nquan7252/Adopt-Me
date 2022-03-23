@@ -37,8 +37,11 @@
     width: auto;
     padding:15px;
     cursor: pointer;
-    border-radius: 20px;
     background-color: #463680;
     color:white;
+    font-size: 1.3em;
     font-weight: 500;
+}
+.pet-info p{
+    font-size: 1.5em;
 }

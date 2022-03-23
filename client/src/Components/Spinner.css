@@ -9,6 +9,7 @@
     border: 3px solid #1f173d;
     animation:spin linear 3s infinite;
     border-top: 3px solid white;
+    margin:-40px 0 0 -40px;
 }
 @keyframes spin{
     to{
