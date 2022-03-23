@@ -82,9 +82,10 @@ function HomePage() {
           </form>
         </div>
       </div>
-      <section className="page2">
-        <div className="data">
+      <div className="data">
+        <h3>Did You Know?</h3>
           <div>
+            <img src={require('../Assets/doggy.png')}></img>
             <h2>6.5 Millions +</h2>
             <p>
               The amount of companion animals are transferred to shelters each
@@ -92,10 +93,12 @@ function HomePage() {
             </p>
           </div>
           <div>
+          <img src={require('../Assets/catty.png')}></img>
             <h2>50%</h2>
             <p>Approximately half of them are adopted into a household</p>
           </div>
           <div>
+          <img src={require('../Assets/hamster.png')}></img>
             <h2>12</h2>
             <p>
               On average, there are 12 animals that are transfered to shelters
@@ -103,13 +106,54 @@ function HomePage() {
             </p>
           </div>
         </div>
+      <section className="page2">
+        
         <div className="animal">
-          <div className="img-container">
+          {/* <div className="img-container">
             <img src={require("../Assets/cat.jpg")}></img>
             <img src={require("../Assets/bird.jpg")}></img>
             <img src={require("../Assets/rabbit.jpg")}></img>
             <img src={require("../Assets/dogcat.jpg")}></img>
             <img src={require("../Assets/fish.jpg")}></img>
+          </div> */}
+          <div className="left">
+          <div>
+          <img src={require("../Assets/animalcare.png")}></img>
+          <div>
+            <h4>Dedicated to save animals</h4>
+            <p>
+              A space where we love the animals and so can you, scroll through a
+              variety of pets and pick one of your favorites{" "}
+            </p>
+          </div>
+        </div>
+        <div>
+          <img src={require("../Assets/heartpaw.png")}></img>
+          <div>
+            <h4>Accurate and live data</h4>
+            <p>Our data is updated every hour</p>
+          </div>
+        </div>
+        <div>
+          <img src={require("../Assets/free.png")}></img>
+          <div>
+            <h4>Cost-free, quick and easy to use</h4>
+            <p>
+              No credit card or subscription required. However, there will be
+              adoption fees that vary from shelter to shelter
+            </p>
+          </div>
+        </div>
+        <div>
+          <img src={require("../Assets/security-shield.png")}></img>
+          <div>
+            <h4>Trust-worthy and safe</h4>
+            <p>
+              Our data is collected through a trust-worthy network of animal
+              shelters across the United States
+            </p>
+          </div>
+        </div>
           </div>
           <div>
             <h1>Why choose us?</h1>
@@ -121,12 +165,13 @@ function HomePage() {
               intermediary connection between our clients and animal shelters.
             </p>
             <Link to="/search/1?location=&#38;type=&#38;coat=&#38;color=&#38;gender=">            
-            <span>Find me a pet</span>
+            <span>Get Started Now</span>
+            <img src={require('../Assets/right-arrow.png')}></img>
             </Link>
           </div>
         </div>
       </section>
-      <section className="page3">
+      {/* <section className="page3">
         <div>
           <img src={require("../Assets/animalcare.png")}></img>
           <div>
@@ -164,7 +209,7 @@ function HomePage() {
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }
