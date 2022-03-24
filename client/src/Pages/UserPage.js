@@ -124,11 +124,12 @@ const checkSave=(id)=>{
                  <h3>{user.name}</h3>
                 <h5>Email: {user.username}</h5>
                 <h5>Saved pets: {saved?saved.length:'0'}</h5>
-                <Link to='/'>Reset password</Link>
+                <Link to={'/reset-password/'+localStorage.getItem('AccessToken')}>Reset password</Link>
              </div>
             }
+             <button onClick={handleLogout}>Log out</button>
+
         </div>
-         <button onClick={handleLogout}>Log out</button>
          </div>:
      <div className='favorite-section'>
      {saved?saved.map((element,index)=><Card fromUser={true} location={element.location} breed={element.breed} image={element.photo} isSaved={checkSave(element.id)} unsave={handleUnsave} save={handleSave} key={element.id} loggedIn={loggedIn} data={element}></Card>)

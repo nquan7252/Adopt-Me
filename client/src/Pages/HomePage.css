@@ -219,7 +219,8 @@ h1{
 .page2{
   position: relative;
   background-size: cover;
-  height:100vh;
+  min-height:100vh;
+  padding:50px;
   background-image: url('../Assets/background2.png');
   background-size: cover;
   display: flex;
@@ -258,17 +259,19 @@ h1{
 }
 .animal{
   display: flex;
+  flex-direction: row-reverse;
   border-radius: 20px;
   justify-content: space-around;
-  margin:0 50px;
   background-color: rgb(255, 255, 255);
   box-shadow: 0 0 8px black;
+  z-index: 10;
 }
 .animal>div:last-child{
   padding:0 70px;
   line-height: 30px;
   width: 40%;
   margin:auto 0;
+  margin-left: 50px;
 }
 .animal img{
   width:200px;
@@ -343,7 +346,7 @@ h1{
   justify-content: center;
   border-radius: 20px;
   padding:10px;
-  height:10em;
+  height:auto;
   margin: 50px 0px;
   background-color: white;
 }
@@ -440,13 +443,16 @@ h1{
       }
       .content form{
         width:100%;
-        padding:0 200px;
+        margin: 0 auto;
         display: flex;
         justify-content: center;
       }
+      .content form input{
+        width:50%
+      }
       .content form button{
         margin: 0;
-        width:30%;
+        width:20%;
       }
   }
   @media (max-width:750px) {
@@ -455,12 +461,33 @@ h1{
     }
     h1::before{
       width: 50px !important;;
-  height: 50p!important;
-  left: -100px !important;;
-  top:-15px;
+  height: 50px!important;
+  left: -60px !important;;
+  top: 8px !important;;
     }
     .left img{
       width: 40px!important;
     height: 40px!important;
   margin: 0 !important;    }
+  }
+  @media (max-width:570px) {
+    .animal>div:last-child{
+      padding:0 20px;
+      margin: 0 auto;
+      width: 100%;
+      text-align: center;
+    }
+    h1::before{
+      display: none!important;
+    }
+    .animal div a{
+      margin:20px 0;
+      position:relative;
+      left:50%;
+      transform:translate(-50%,0);
+    }
+    .left>div{
+      margin:0;
+      padding:0
+    }
   }

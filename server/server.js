@@ -14,9 +14,10 @@ var sengrid=require('@sendgrid/mail');
 const { CONNREFUSED } = require('dns');
 sengrid.setApiKey(API_KEY2);
 
-const API_KEY1="64b90238fd46902f6435bb063a12259c-dbc22c93-0406e405"
-const DOMAIN="sandboxb14500b19fdb4cea846f8e5aa810152c.mailgun.org"
-var mailgun = require('mailgun-js')({apiKey: API_KEY1, domain: DOMAIN});
+const dbusername='b04be49d5384e5';
+const dbpassword='7e20e5b7'
+const dbhost='us-cdbr-east-05.cleardb.net'
+const dbname='heroku_2caf1be8c84832b'
 
 const TOKEN_URL = "https://api.petfinder.com/v2/oauth2/token";
 const API_KEY = "1PcE3E0Tf6eIIcNTf8wiytdxoBy4ZSEMjDMJKbrAsdJDqYTC6K";
@@ -34,10 +35,10 @@ const saveQuery="UPDATE account SET saved=concat('[',TRIM(LEADING '[' FROM TRIM(
 const getSavedQuery="SELECT saved FROM account WHERE username=?"
 const removeSavedQuery="UPDATE account SET saved=REPLACE(saved,CONCAT(?,','),'')"
 var con = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "nguyenquan00",
-  database: "sql_account",
+  host: dbhost,
+  user:dbusername,
+  password: dbpassword,
+  database: dbname,
 });
 
 const getNewToken = () => {
@@ -162,7 +163,7 @@ app.put('/reset-password-next',(req,res)=>{
     con.query(updatePasswordQuery,[newPassword,user[0].username],(err,result)=>{
       if (err) console.log(err);
       else 
-        console.log('idk what to put here');
+        res.end();
     })   
   })
 })
@@ -275,3 +276,5 @@ function authToken(req,res,next){
   })
 }
 app.listen(PORT);
+
+//mysql://b04be49d5384e5:7e20e5b7@us-cdbr-east-05.cleardb.net/heroku_2caf1be8c84832b?reconnect=true

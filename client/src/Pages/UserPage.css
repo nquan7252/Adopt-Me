@@ -34,11 +34,24 @@ color: #1f173d;
      align-items: center;
      justify-content: center;
      margin: 50px 0;
+     position:relative;
+ }
+ .profile-section button{
+     width:auto;
+     position:absolute;
+     padding:10px;
+     bottom:-50px;
+     cursor: pointer;
+     background-color:#1f173d;
+     color:white;
+     font-size: 1em;
+     font-weight: 600;
  }
  .profile-section img{
      margin:0 50px;
      cursor: pointer;
  }
+ 
  @media (max-width:800px) {
      .selection-bar span{
          font-size: 1.9em!important;
