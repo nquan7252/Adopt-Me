@@ -33,7 +33,7 @@ function SearchPage(props) {
   //       setLoggedIn(false)});
   // });
   const [loggedIn, setLoggedIn] = useState(()=>{
-    axios.get('http://localhost:3001/avatar',{headers:{
+    axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/avatar',{headers:{
       authorization:'Bearer '+localStorage.getItem('AccessToken')
     }})
       .then((res) => setLoggedIn(res.data))
@@ -46,7 +46,7 @@ function SearchPage(props) {
   });
   const [filterParams,setfilterParams]=useState({location:'',type:'',coat:'',color:'',gender:''})
   const handleFilterSearch=(info)=>{
-    //axios.get('http://localhost:3001/search/1')
+    //axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/search/1')
     //set params
     let queryparam=`location=${info.location}&type=${info.type}&color=${info.color}&coat=${info.coat}&gender=${info.gender}`
    // props.navigation.push('/search/1?'+queryparam)
@@ -62,7 +62,7 @@ function SearchPage(props) {
   }
   const handleSave=(data)=>{
     setSaved(prev=>[...prev,String(data.id)]);
-    axios.get('http://localhost:3001/save',{headers:{
+    axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/save',{headers:{
     authorization:'Bearer '+ localStorage.getItem('AccessToken')},
     params:{
     animalId:data.id,
@@ -79,7 +79,7 @@ function SearchPage(props) {
       arr.splice(arr.indexOf(String(data.id)),1)
       return arr
     })
-    axios.get('http://localhost:3001/unsave',{headers:{
+    axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/unsave',{headers:{
     authorization:'Bearer '+ localStorage.getItem('AccessToken')},
     params:{
     animalId:data.id,
@@ -98,7 +98,7 @@ function SearchPage(props) {
   const [data, setData] = useState(null);
   useEffect(() => {
     console.log('hereeee',currentPage)
-    axios.get(`http://localhost:3001/search/${currentPage}`,{params:para}).then((res) =>{console.log(res.data) 
+    axios.get(`https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/search/${currentPage}`,{params:para}).then((res) =>{console.log(res.data) 
     setData(res.data)
   }
     ).catch(err=>{
@@ -113,7 +113,7 @@ function SearchPage(props) {
   useEffect(()=>{
     if (loggedIn){
       console.log('start fetching save')
-    axios.get("http://localhost:3001/getSaved",{headers:{
+    axios.get("https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/getSaved",{headers:{
         Authorization:'Bearer ' +localStorage.getItem('AccessToken')}}
     ).then(result=>{
       console.log('result from getsave is',result.data)

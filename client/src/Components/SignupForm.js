@@ -18,7 +18,7 @@ function SignupForm(props) {
         if (e.target[2].value.length<8)
         alert('Password has to be at least 8 characters')
         else{
-            axios.post('http://localhost:3001/signup',{name:e.target[0].value,email:e.target[1].value,password:e.target[2].value,avatar:avatarr}).then(navigate('/login')).catch(err=>setError(err.response.data.message));
+            axios.post('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/signup',{name:e.target[0].value,email:e.target[1].value,password:e.target[2].value,avatar:avatarr}).then(navigate('/login')).catch(err=>setError(err.response.data.message));
         }
     }
     const handleClick=(index)=>{

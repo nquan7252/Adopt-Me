@@ -30,7 +30,7 @@ function UserPage() {
     }
     const [showUnsaveSuccess,setShowUnsaveSuccess]=useState(false)
     const [loggedIn, setLoggedIn] = useState(async()=>{
-        axios.get('http://localhost:3001/avatar',{headers:{
+        axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev//avatar',{headers:{
           authorization:'Bearer '+localStorage.getItem('AccessToken')
         }})
           .then((res) => setLoggedIn(res.data))
@@ -40,7 +40,7 @@ function UserPage() {
       });
   const handleSave=(data)=>{
     setSaved(prev=>[...prev,String(data.id)]);
-    axios.get('http://localhost:3001/save',{headers:{
+    axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev//save',{headers:{
     authorization:'Bearer '+ localStorage.getItem('AccessToken')},
     params:{
     animalId:data.id,
@@ -63,7 +63,7 @@ function UserPage() {
       
       return arr
     })
-    axios.get('http://localhost:3001/unsave',{headers:{
+    axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev//unsave',{headers:{
     authorization:'Bearer '+ localStorage.getItem('AccessToken')},
     params:{
     animalId:data.id,
@@ -90,7 +90,7 @@ const checkSave=(id)=>{
     return false;
   }
     const [saved,setSaved]=useState(()=>{
-        axios.get('http://localhost:3001/getSaved',{headers:{
+        axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/getSaved',{headers:{
             Authorization:'Bearer '+localStorage.getItem('AccessToken')
         }}).then(result=>{
             console.log('result from saved is',JSON.parse(result.data))
@@ -98,7 +98,7 @@ const checkSave=(id)=>{
     })
     const [user,setUser]=useState(()=>{
         if (localStorage.getItem('AccessToken')){
-        axios.get('http://localhost:3001/user',{
+        axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/user',{
             headers:{
                 Authorization:'Bearer '+localStorage.getItem('AccessToken')
             }

@@ -14,12 +14,12 @@ function PasswordResetPage2() {
         else if (e.target[0].value.length<8)
         alert('Password has to be at least 8 characters')
         else 
-        axios.put('http://localhost:3001/reset-password-next',{newPassword:e.target[0].value,token:para.token}).then(()=>setShowSuccess(true)).catch(console.log)
+        axios.put('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/reset-password-next',{newPassword:e.target[0].value,token:para.token}).then(()=>setShowSuccess(true)).catch(console.log)
     }
     const para=useParams();
     console.log(para);
     const [valid,setValid]=useState(()=>{
-        axios.get('http://localhost:3001/authenticate',{headers:{
+        axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/authenticate',{headers:{
             Authorization:'Bearer '+para.token
         }}).then(()=>setValid(true)).catch(()=>setValid(false))
     })

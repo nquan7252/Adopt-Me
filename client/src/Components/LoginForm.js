@@ -7,7 +7,7 @@ function LoginForm(props) {
     const [error,setError]=useState(false);
     const handleLogin=(e)=>{
         e.preventDefault();
-        axios.post('http://localhost:3001/login',{username:e.target[0].value,password:e.target[1].value}).then(message=>{
+        axios.post('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/login',{username:e.target[0].value,password:e.target[1].value}).then(message=>{
         localStorage.setItem('AccessToken',message.data.accessToken)    
         console.log(message)  
         navigate(props.from);

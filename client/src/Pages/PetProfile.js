@@ -13,7 +13,7 @@ function PetProfile() {
     const handleSave=()=>{
       console.log('asdasdasd')
         if(!loggedIn) return setShowRequest(true);
-        axios.get('http://localhost:3001/save',{headers:{
+        axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/save',{headers:{
     authorization:'Bearer '+ localStorage.getItem('AccessToken')},
     params:{
     animalId:data.id,
@@ -26,7 +26,7 @@ function PetProfile() {
 .then(()=>setSaved(true));
     }
     const handleUnsave=()=>{
-      axios.get('http://localhost:3001/unsave',{headers:{
+      axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/unsave',{headers:{
         authorization:'Bearer '+ localStorage.getItem('AccessToken')},
         params:{
         animalId:data.id,
@@ -44,7 +44,7 @@ function PetProfile() {
       if (typeof(location.state.data)=='object')
       return location.state.data
       else{
-      axios.get('http://localhost:3001/petId',{headers:{
+      axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/petId',{headers:{
         authorization:'Bearer '+localStorage.getItem('AccessToken')
       }
         ,params:{animalId:location.state.data.split(" ")[1]}}).then((result)=>{
@@ -53,7 +53,7 @@ function PetProfile() {
       })
     }});
     const [loggedIn, setLoggedIn] = useState(()=>{
-      axios.get('http://localhost:3001/avatar',{headers:{
+      axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/avatar',{headers:{
         authorization:'Bearer '+localStorage.getItem('AccessToken')
       }})
         .then((res) => setLoggedIn(res.data))
@@ -63,7 +63,7 @@ function PetProfile() {
     });
     const [saved,setSaved]=useState(null);
     useEffect(()=>{
-      axios.get("http://localhost:3001/getSaved",{headers:{
+      axios.get("https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/getSaved",{headers:{
         Authorization:'Bearer ' +localStorage.getItem('AccessToken')}}
     ).then(result=>{
       console.log('result from getsave is',result.data)

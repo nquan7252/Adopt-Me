@@ -13,7 +13,7 @@ function HomePage() {
   const navigate = useNavigate();
   const checkLogIn = () => {
     axios
-      .get("http://localhost:3001/authenticate", {
+      .get("https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/authenticate", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("AccessToken"),
         },
@@ -24,7 +24,7 @@ function HomePage() {
 
   const [loggedIn, setLoggedIn] = useState(async () => {
     axios
-      .get("http://localhost:3001/avatar", {
+      .get("https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/avatar", {
         headers: {
           authorization: "Bearer " + localStorage.getItem("AccessToken"),
         },

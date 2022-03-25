@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ad3f5ebf.css",
+    "main.js": "/static/js/main.87eb0335.js",
+    "static/js/787.b6850964.chunk.js": "/static/js/787.b6850964.chunk.js",
+    "static/media/dog.png": "/static/media/dog.1587826f8f4ec77b598d.png",
+    "static/media/rabbit.jpg": "/static/media/rabbit.dcf12c58fc1befd93efd.jpg",
+    "static/media/bird.jpg": "/static/media/bird.dd5e5ec6cd438ed0e1c7.jpg",
+    "static/media/cat.jpg": "/static/media/cat.ea53f08cb593bfee9326.jpg",
+    "static/media/dogcat.jpg": "/static/media/dogcat.bf6b35790fbf5f916d9c.jpg",
+    "static/media/paw.png": "/static/media/paw.b9e5e29fdbd9f2876d20.png",
+    "static/media/animalcare.png": "/static/media/animalcare.a7979849e7f4bed048be.png",
+    "static/media/background.png": "/static/media/background.e7bbdb77eb4e1720d826.png",
+    "static/media/catty.png": "/static/media/catty.a5bd764c09b158951477.png",
+    "static/media/background2.png": "/static/media/background2.01ba3ea6e1549a7e0f10.png",
+    "static/media/hamster.png": "/static/media/hamster.7d70b8b31460251f74f6.png",
+    "static/media/meat.png": "/static/media/meat.fee63721184a5bb430a5.png",
+    "static/media/security-shield.png": "/static/media/security-shield.a142f879297b543cf533.png",
+    "static/media/doggy.png": "/static/media/doggy.e6d8067d27cb5448fb9e.png",
+    "static/media/heartpaw.png": "/static/media/heartpaw.26d6e1d0c6ac58a9c3de.png",
+    "static/media/heart1.png": "/static/media/heart1.f2bf5cd3aac29d5127a5.png",
+    "static/media/website.png": "/static/media/website.10a2be69190b69626a3e.png",
+    "static/media/location.png": "/static/media/location.4ba2450b71e973e57b09.png",
+    "static/media/free.png": "/static/media/free.b687401a66a332e7ba8b.png",
+    "static/media/logo.png": "/static/media/logo.d978c0645bda56a0a11c.png",
+    "static/media/instagram.png": "/static/media/instagram.79ea850107caae079257.png",
+    "static/media/signup.png": "/static/media/signup.a5c6ae51810f726594ac.png",
+    "static/media/dashboard.png": "/static/media/dashboard.eedb2201ff7cb6fb8809.png",
+    "static/media/profile.png": "/static/media/profile.eedb2201ff7cb6fb8809.png",
+    "static/media/right-arrow.png": "/static/media/right-arrow.461027db755b9f96c7bd.png",
+    "static/media/filter.png": "/static/media/filter.041d6eca593c7d0be66b.png",
+    "static/media/dogavatar1.png": "/static/media/dogavatar1.9f9e505450298ffe22d3.png",
+    "static/media/logo.svg": "/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/index.html",
+    "main.ad3f5ebf.css.map": "/static/css/main.ad3f5ebf.css.map",
+    "main.87eb0335.js.map": "/static/js/main.87eb0335.js.map",
+    "787.b6850964.chunk.js.map": "/static/js/787.b6850964.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ad3f5ebf.css",
+    "static/js/main.87eb0335.js"
+  ]
+}

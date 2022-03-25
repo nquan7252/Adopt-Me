@@ -6,7 +6,7 @@ function PasswordResetPage1() {
     const navigate=useNavigate()
     const handleSubmit=(e)=>{
         e.preventDefault();
-        axios.post('http://localhost:3001/reset-password',{username:e.target[0].value}).then(
+        axios.post('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/reset-password',{username:e.target[0].value}).then(
             (result)=>{
                 console.log('success, an email has been sent to you')   
             }

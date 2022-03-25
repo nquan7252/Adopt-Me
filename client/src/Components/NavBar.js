@@ -34,7 +34,7 @@ function NavBar(props) {
   // useEffect(()=>{
   //   console.log('fetching avba',props.isLoggedIn)
   //   if (props.isLoggedIn){
-  //     axios.get('http://localhost:3001/avatar',{headers:{
+  //     axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/avatar',{headers:{
   //       Authorization:'Bearer '+localStorage.getItem('AccessToken')
   //     }}).then(result=>setImg(result.data))
   //   }
