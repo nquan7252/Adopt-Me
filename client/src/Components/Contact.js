@@ -11,7 +11,7 @@ function Contact() {
       <div className="about">
           <h3>About me</h3>
           <p>I'm currently a sophomore CS student in San Diego who is always devote myself to learn and create meaningful products.
-              With this web app, I believe that pets are humans best friend and something was about to happen 
+              With this web app, I believe that we can make a difference to ourselves as well as the animals and fill the community with love!
                </p>
       </div>
       <div className="info">

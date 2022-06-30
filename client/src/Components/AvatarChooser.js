@@ -5,7 +5,7 @@ import { useState } from 'react';
 function AvatarChooser(props) {
     const [active,setActive]=useState(0);
     return <div className='avatar-chooser'>
-        {avatar.map((element,index)=><img onClick={()=>{props.handleClick(index);setActive(index)}} id={index==active?'active':''} src={element.path}></img>)}
+        {avatar.map((element,index)=><img onClick={()=>{props.handleClick(index);setActive(index)}} id={index==active?'active':''} src={require(`../Assets/${element.path}`)}></img>)}
     </div>;
 }
 

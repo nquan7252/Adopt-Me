@@ -1,7 +1,10 @@
 .App {
   text-align: center;
 }
-
+*{
+  -moz-appearance: none; 
+  -webkit-appearance: none
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -9,6 +12,9 @@
 body,html{
   height:100%;
   width: 100%;
+}
+body{
+  height:auto;
 }
 *{
   margin: 0;

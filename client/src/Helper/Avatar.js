@@ -1,8 +1,8 @@
 export const avatar=[
-    {id:1,path:require('../Assets/dogavatar.png')},
-    {id:2,path:require('../Assets/dogavatar1.png')},
-    {id:3,path:require('../Assets/dogavatar2.png')},
-    {id:4,path:require('../Assets/horseavatar.png')},
-    {id:5,path:require('../Assets/fishavatar.png')},
-    {id:6,path:require('../Assets/rabbitavatar.png')}
+    {id:1,path:'dogavatar.png'},
+    {id:2,path:'dogavatar1.png'},
+    {id:3,path:'dogavatar2.png'},
+    {id:4,path:'horseavatar.png'},
+    {id:5,path:'fishavatar.png'},
+    {id:6,path:'rabbitavatar.png'}
 ]

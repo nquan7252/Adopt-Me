@@ -6,9 +6,7 @@ import './PasswordReset.css'
 function PasswordResetPage2() {
     const [showSuccess,setShowSuccess]=useState(false);
     const handleSubmit=(e)=>{
-        console.log(para)
         e.preventDefault();
-        console.log('new password is',e.target[0].value)
         if (e.target[0].value!=e.target[1].value)
         alert('Passwords do not match')
         else if (e.target[0].value.length<8)
@@ -17,7 +15,6 @@ function PasswordResetPage2() {
         axios.put('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/reset-password-next',{newPassword:e.target[0].value,token:para.token}).then(()=>setShowSuccess(true)).catch(console.log)
     }
     const para=useParams();
-    console.log(para);
     const [valid,setValid]=useState(()=>{
         axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/authenticate',{headers:{
             Authorization:'Bearer '+para.token

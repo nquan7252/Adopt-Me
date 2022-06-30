@@ -22,7 +22,6 @@ function SignupForm(props) {
         }
     }
     const handleClick=(index)=>{
-        console.log(index,'clicked')
         setAvatar(avatar[index].path);
     }
     return <div id='login-container'>

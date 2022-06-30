@@ -12,30 +12,30 @@ var mysql = require("mysql");
 const apicache=require('apicache')
 let cache=apicache.middleware
 
-const API_KEY2='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'
+const API_KEY2=process.env.API_KEY2
 var sengrid=require('@sendgrid/mail');
 const { CONNREFUSED } = require('dns');
 sengrid.setApiKey(API_KEY2);
 
-const dbusername='b04be49d5384e5';
-const dbpassword='7e20e5b7'
-const dbhost='us-cdbr-east-05.cleardb.net'
-const dbname='heroku_2caf1be8c84832b'
+const dbusername=process.env.dbusername
+const dbpassword=process.env.dbpassword
+const dbhost=process.env.dbhost
+const dbname=process.env.dbname
 
 const TOKEN_URL = "https://api.petfinder.com/v2/oauth2/token";
-const API_KEY = "1PcE3E0Tf6eIIcNTf8wiytdxoBy4ZSEMjDMJKbrAsdJDqYTC6K";
-const SECRET = "UvehDKy01zwXUEGGSpFAvyKSZ6t9fWAuBXKcKfTr";
+const API_KEY = process.env.API_KEY
+const SECRET = process.env.SECRET;
 var token;
 var app = express();
 const PORT = process.env.PORT || 3001;
 
 const updatePasswordQuery="UPDATE account SET password=? WHERE username=?"
-const createUserQuery ="BEGIN; INSERT INTO account (name,username,password,avatar) VALUES(?,?,?,?);";
+const createUserQuery ="INSERT INTO account (name,username,password,avatar) VALUES(?,?,?,?);";
 const fetchUserQuery = "SELECT * FROM account WHERE username=? AND password=?";
 const checkAlreadyExist="SELECT * FROM account WHERE username=?"
-const saveQuery="UPDATE account SET saved=concat('[',TRIM(LEADING '[' FROM TRIM(TRAILING ']' FROM COALESCE(saved,''))),?,',',']') WHERE username=?"
-const getSavedQuery="SELECT saved FROM account WHERE username=?"
-const removeSavedQuery="UPDATE account SET saved=REPLACE(saved,CONCAT(?,','),'')"
+const saveQuery="UPDATE saved SET saved=concat('[',TRIM(LEADING '[' FROM TRIM(TRAILING ']' FROM COALESCE(saved,''))),?,',',']') WHERE username=?"
+const getSavedQuery="SELECT saved FROM saved WHERE username=?"
+const removeSavedQuery="UPDATE saved SET saved=REPLACE(saved,CONCAT(?,','),'')"
 var con = mysql.createPool({
   host: dbhost,
   user:dbusername,
@@ -77,7 +77,7 @@ const getNewToken = () => {
   // })
 }
 const search = (res,url,tokenn) => {
-  console.log('token received',tokenn)
+  console.log('token received')
    return axios.get(url, {
     headers: {
       Authorization: "Bearer " + tokenn,
@@ -96,7 +96,7 @@ const search = (res,url,tokenn) => {
     });
 };
 
-app.get("/search/:page", (req, res) => {
+app.get("/search/:page",cache('60 minutes'), (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
 
   let page=req.params.page;
@@ -124,22 +124,22 @@ app.post("/signup", (req, res) => {
      res.status(400).send({message:'Account already existed'});
     }
     else 
-    con.query('BEGIN;',()=>{
+   
       con.query(
         createUserQuery,
         [req.body.name, req.body.email, req.body.password,req.body.avatar,req.body.email,req.body.avatar],
         (err, result) => {
           if (err) console.log(err);
-          else con.query("INSERT INTO imgs (username,avatar) VALUES (?,?);",[req.body.email,req.body.avatar]),(err,result1)=>{
-            if (err) console.log(err);
             else{
-              con.query('COMMIT;')
-            res.send('Account successfully created');
+              con.query("INSERT into saved (username) VALUE(?)",req.body.email,(err,resultt)=>{
+                if (err) console.log(err)
+                else
+                res.send('Account successfully created');
+              })
             }
           } 
-        }
       );
-    })
+ 
     
   })
 });
@@ -349,4 +349,3 @@ app.get('/testt',(req,res)=>{
 app.listen(PORT);
 module.exports.handler = serverless(app);
 
-//mysql://b04be49d5384e5:7e20e5b7@us-cdbr-east-05.cleardb.net/heroku_2caf1be8c84832b?reconnect=true

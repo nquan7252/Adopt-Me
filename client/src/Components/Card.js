@@ -7,8 +7,6 @@ import axios from "axios";
 import { data, escapeSelector } from "jquery";
 function Card(props) {
   const [loggedIn, setLoggedIn] = useState(props.loggedIn);
-  const [internalSave, setInternalSave] = useState(false);
-
   // const [loggedIn,setLoggedIn]=useState(null);
   // useEffect(() => {
   //     isLoggedIn()
@@ -16,8 +14,7 @@ function Card(props) {
   //       .catch(() => setLoggedIn(false));
   //   }, []);
   const save = () => {
-    if (!loggedIn) return props.handleShowRequest();
-    console.log("user want to save");
+    if (!props.loggedIn) return props.handleShowRequest();
     props.save(props.data);
   };
   const unsave = () => {

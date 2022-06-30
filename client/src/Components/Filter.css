@@ -62,15 +62,24 @@ select{
     padding:10px 5px;
 
 }
+.primary-search{
+    width: 100%;
+}
 @media (max-width:860px){
     .filter form{
         padding:0 10px;
     }
     .primary-search input:first-child{
-        width:70%
+        width:60%
     }
     .primary-search input:nth-child(2){
        width: 30%;
+    }
+    .primary-search form span{
+        width: 10%!important;
+    }
+    .primary-search img{
+     
     }
     .filter{
         margin-left:0;

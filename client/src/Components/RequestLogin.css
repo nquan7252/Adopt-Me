@@ -8,6 +8,8 @@
     border-radius: 10px;
     color:white;
     z-index: 11;
+    text-align: center;
+    display: block;
 }
 .request-login div{
     margin-top: 10px;
@@ -18,8 +20,8 @@
     color:#e5ecce;
 }
 .request-login img{
-    width: 15px;
-    height:15px;
+    width: 20px!important;
+    height: 20px !important;;
     filter: invert(1);
     position: absolute;
     top:0;

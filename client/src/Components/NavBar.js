@@ -11,6 +11,10 @@ function NavBar(props) {
   const currentLocation = useLocation();
   const [img,setImg]=useState(null);
   const menuToggle=useRef();
+  const [avatar,setAvatar]=useState(props.isLoggedIn);
+  useEffect(()=>{
+    setAvatar(props.isLoggedIn)
+  },[props.isLoggedIn])
   const openMenu=()=>{
     $('.menu-hamburger-content').fadeIn()
     $('#fade1').fadeIn(500);
@@ -45,7 +49,6 @@ function NavBar(props) {
     window.location.href='/'
   }
   const location=useLocation();
-  console.log('search page location is',location)
   return (
     <div className="navbar">
       <Link to="/">
@@ -75,7 +78,9 @@ function NavBar(props) {
           <Link to="/search/1?location=&#38;type=&#38;coat=&#38;color=&#38;gender=">
             <span>Find a pet</span>
           </Link>
-          <span>Contact</span>
+          <Link to='/'>
+          <span onClick={()=>window.scroll({top:document.body.offsetHeight,left:0,behavior:'smooth'})}>Contact</span>
+          </Link>
         </div>
         {!props.isLoggedIn ? (
           <div className="login-signup">
@@ -89,7 +94,7 @@ function NavBar(props) {
         ) : (
           <div className="login-signup user">
             <img
-              src={props.isLoggedIn}
+                src={props.avatar!=null?require(`../Assets/${props.avatar}`):''}
               onClick={() => setOpen(!open)}
             ></img>
             {open && (

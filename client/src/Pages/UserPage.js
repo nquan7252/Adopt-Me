@@ -14,13 +14,13 @@ import AvatarChooser from '../Components/AvatarChooser';
 import AvatarChanger from '../Components/AvatarChanger';
 function UserPage() {
     const location=useLocation();
+    const [avatar,setAvatar]=useState(null);
     const [showChangeAva,setShowChangeAva]=useState(false);
     const handleLogout=()=>{
         localStorage.removeItem('AccessToken');
         window.location.href='/logoutSuccess'
     }
     const [active,setActive]=useState(()=>{
-        console.log('location state ',location.state)
          if(location.state.chosen=='profile')
         return 'profile'
         return 'favorites'
@@ -33,7 +33,9 @@ function UserPage() {
         axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev//avatar',{headers:{
           authorization:'Bearer '+localStorage.getItem('AccessToken')
         }})
-          .then((res) => setLoggedIn(res.data))
+          .then((res) => {setLoggedIn(res.data)
+        setAvatar(res.data)
+        })
           .catch((err) => {
             console.log(err.response.data);
             setLoggedIn(false)});
@@ -93,7 +95,6 @@ const checkSave=(id)=>{
         axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/getSaved',{headers:{
             Authorization:'Bearer '+localStorage.getItem('AccessToken')
         }}).then(result=>{
-            console.log('result from saved is',JSON.parse(result.data))
             setSaved(JSON.parse(result.data))})
     })
     const [user,setUser]=useState(()=>{
@@ -102,7 +103,7 @@ const checkSave=(id)=>{
             headers:{
                 Authorization:'Bearer '+localStorage.getItem('AccessToken')
             }
-        }).then(res=>{console.log(res.data[0])
+        }).then(res=>{
             setUser(res.data[0])}).catch(console.log)
     }
     else{
@@ -114,12 +115,12 @@ const checkSave=(id)=>{
     
     {showUnsaveSuccess&&<UnsaveSuccessBanner/>}
     
-    <NavBar isLoggedIn={loggedIn}/>
+    <NavBar isLoggedIn={loggedIn} avatar={avatar}/>
     <SelectionBar active={active} onClick={handleSwitch}/>
     {showChangeAva&&<AvatarChanger/>}
      {active=='profile'?<div className='profile-section'>
          <div>
-             <img src={loggedIn}></img>
+             <img src={avatar!=null?require('../Assets/'+avatar):''}></img>
              {user&&<div style={{display:'block'}}>
                  <h3>{user.name}</h3>
                 <h5>Email: {user.username}</h5>

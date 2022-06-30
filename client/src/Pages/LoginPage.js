@@ -15,7 +15,6 @@ function LoginPage () {
         })
         let navigate=useNavigate();
         const location=useLocation();
-        console.log(location)
         
     return <div className='page'>
                 {loggedIn?navigate('/user',{state:{chosen:'profile'}}):<LoginForm from={location.state!=null?location.state.from:'/' }/>} 

@@ -157,9 +157,20 @@
     }
     .menu-hamburger-content span{
         font-size: 0.8em;
+        margin-left: 25px;
+    }
+    .menu-hamburger-content div{
+        margin-top: 50px;
+        margin-bottom:50px;
+        margin-left: 0;
     }
     .menu-hamburger-content img{
-        
-    
+        width: 10px!important;
+        height: 10px !important;
+        vertical-align: middle!important;
+        top: 0 !important;;
+    }
+    #fade1{
+        margin-top: 90px!important;
     }
 }

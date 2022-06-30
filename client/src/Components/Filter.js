@@ -6,14 +6,12 @@ import { useLocation } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
 function Filter(props) {
     const handleChange=(e)=>{
-        console.log(e.target.value);
         setType(e.target.value)
     }
     const [par,setPar]=useSearchParams();
     const handleSubmit=(e)=>{
         e.preventDefault();
         let [...test]=e.target;
-        console.log(test)
     }
     const toggleAdvanced=()=>{
         $('.advanced-search').slideToggle();
@@ -26,7 +24,6 @@ function Filter(props) {
         let color=e.target[4].value;
         let gender=e.target[5].value;
         let filter={location,type,coat,color,gender}
-        console.log(filter);
         props.handleSearch(filter);
         // props.handleSearch(e.target[0].value?e.target[0].value:null)
     }

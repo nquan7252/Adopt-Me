@@ -18,7 +18,6 @@ function SearchPage(props) {
   const pageNum=useParams();
   const [searchParams,setSearchParams]=useSearchParams()
 
-  console.log(searchParams.get("num"))
   const [para,setPara]=useState({location:searchParams.get('location'),
   type:searchParams.get('type'),
   coat:searchParams.get('coat'),
@@ -32,11 +31,14 @@ function SearchPage(props) {
   //       console.log(err.response.data);
   //       setLoggedIn(false)});
   // });
+  const [avatar,setAvatar]=useState(null)
   const [loggedIn, setLoggedIn] = useState(()=>{
     axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/avatar',{headers:{
       authorization:'Bearer '+localStorage.getItem('AccessToken')
     }})
-      .then((res) => setLoggedIn(res.data))
+      .then((res) => {setLoggedIn(res.data)
+      setAvatar(res.data);
+      })
       .catch((err) => {
         console.log(err.response.data);
         setLoggedIn(false)});
@@ -97,8 +99,7 @@ function SearchPage(props) {
   const [showRequest,setShowRequest]=useState(false);
   const [data, setData] = useState(null);
   useEffect(() => {
-    console.log('hereeee',currentPage)
-    axios.get(`https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/search/${currentPage}`,{params:para}).then((res) =>{console.log(res.data) 
+    axios.get(`https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/search/${currentPage}`,{params:para}).then((res) =>{ 
     setData(res.data)
   }
     ).catch(err=>{
@@ -112,11 +113,9 @@ function SearchPage(props) {
   
   useEffect(()=>{
     if (loggedIn){
-      console.log('start fetching save')
     axios.get("https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/getSaved",{headers:{
         Authorization:'Bearer ' +localStorage.getItem('AccessToken')}}
     ).then(result=>{
-      console.log('result from getsave is',result.data)
         let likedAnimals=[...JSON.parse(result.data)]
         let idArray=[]
         for (let i=0;i<likedAnimals.length;i++){
@@ -136,7 +135,7 @@ function SearchPage(props) {
   }
   return false;
   }
-  return<><NavBar isLoggedIn={loggedIn}/>
+  return<><NavBar isLoggedIn={loggedIn} avatar={avatar}/>
   <Filter handleSearch={handleFilterSearch}/>
   <div className="big-card-container">
     <div ref={overlay} className="overlay"></div>

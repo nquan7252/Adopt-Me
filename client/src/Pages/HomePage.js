@@ -8,9 +8,13 @@ import Contact from "../Components/Contact";
 import $ from "jquery";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import smoothscroll from 'smoothscroll-polyfill';
+smoothscroll.polyfill();
 function HomePage() {
   const child1 = useRef();
   const navigate = useNavigate();
+  const [avatar,setAvatar]=useState(null);
+  const learnmore=useRef();
   const checkLogIn = () => {
     axios
       .get("https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/authenticate", {
@@ -29,7 +33,9 @@ function HomePage() {
           authorization: "Bearer " + localStorage.getItem("AccessToken"),
         },
       })
-      .then((res) => setLoggedIn(res.data))
+      .then((res) => {setLoggedIn(res.data)
+       setAvatar(res.data); 
+      })
       .catch((err) => {
         console.log(err.response.data);
         setLoggedIn(false);
@@ -50,11 +56,12 @@ function HomePage() {
       );
   };
   const showSearch = () => {
+    child1.current.style.display='flex';
     $("#searchForm").slideToggle();
   };
   return (
     <div>
-      <NavBar isLoggedIn={loggedIn} />
+      {<NavBar isLoggedIn={loggedIn} avatar={avatar} />}
       <div className="body">
         {/* {images.map((element, index) => {
           return (
@@ -75,7 +82,7 @@ function HomePage() {
           <button id="getStarted" onClick={showSearch}>
             FIND A PET
           </button>
-          <button id="learnMore">LEARN MORE</button>
+          <button id="learnMore" onClick={()=>learnmore.current.scrollIntoView({behavior:'smooth'})}>LEARN MORE</button>
           <form ref={child1} id="searchForm" onSubmit={handleSubmit}>
             <input type="text" placeholder="Enter Zip Code..."></input>
             <button type="submit">Search</button>
@@ -89,26 +96,26 @@ function HomePage() {
             <h2>6.5 Millions +</h2>
             <p>
               The amount of companion animals are transferred to shelters each
-              year in the US
+              year in the US.
             </p>
           </div>
           <div>
           <img src={require('../Assets/catty.png')}></img>
             <h2>50%</h2>
-            <p>Approximately half of them are adopted into a household</p>
+            <p>Approximately half of them are adopted into a household.</p>
           </div>
           <div>
           <img src={require('../Assets/hamster.png')}></img>
             <h2>12</h2>
             <p>
               On average, there are 12 animals that are transfered to shelters
-              per minute in the US
+              per minute in the US.
             </p>
           </div>
         </div>
-      <section className="page2">
+      <section className="page2" ref={learnmore}>
         
-        <div className="animal">
+        <div className="animal" >
           {/* <div className="img-container">
             <img src={require("../Assets/cat.jpg")}></img>
             <img src={require("../Assets/bird.jpg")}></img>
@@ -122,8 +129,8 @@ function HomePage() {
           <div>
             <h4>Dedicated to save animals</h4>
             <p>
-              A space where we love the animals and so can you, scroll through a
-              variety of pets and pick one of your favorites{" "}
+              A space where we can express love for the animals and so can you, scroll through a
+              variety of pets and help them find a home.{" "}
             </p>
           </div>
         </div>
@@ -131,7 +138,7 @@ function HomePage() {
           <img src={require("../Assets/heartpaw.png")}></img>
           <div>
             <h4>Accurate and live data</h4>
-            <p>Our data is updated every hour</p>
+            <p>Our data is updated every hour from more than 10,000 animal organizations in the US.</p>
           </div>
         </div>
         <div>
@@ -140,7 +147,7 @@ function HomePage() {
             <h4>Cost-free, quick and easy to use</h4>
             <p>
               No credit card or subscription required. However, there will be
-              adoption fees that vary from shelter to shelter
+              adoption fees that vary from shelter to shelter.
             </p>
           </div>
         </div>
@@ -150,7 +157,7 @@ function HomePage() {
             <h4>Trust-worthy and safe</h4>
             <p>
               Our data is collected through a trust-worthy network of animal
-              shelters across the United States
+              shelters across the United States.
             </p>
           </div>
         </div>

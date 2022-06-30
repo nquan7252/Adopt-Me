@@ -10,8 +10,10 @@ import './PetProfile.css'
 import RequestLogin from '../Components/RequestLogin';
 function PetProfile() {
     const location=useLocation();
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
     const handleSave=()=>{
-      console.log('asdasdasd')
         if(!loggedIn) return setShowRequest(true);
         axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/save',{headers:{
     authorization:'Bearer '+ localStorage.getItem('AccessToken')},
@@ -39,7 +41,7 @@ function PetProfile() {
     .then(()=>setSaved(false));
     }
     const [showRequest,setShowRequest]=useState(false);
-    
+    const [avatar,setAvatar]=useState(null)
     const [data,setData]=useState(()=>{
       if (typeof(location.state.data)=='object')
       return location.state.data
@@ -48,7 +50,6 @@ function PetProfile() {
         authorization:'Bearer '+localStorage.getItem('AccessToken')
       }
         ,params:{animalId:location.state.data.split(" ")[1]}}).then((result)=>{
-        console.log("omg",result.data.animal)
          setData(result.data.animal);
       })
     }});
@@ -56,7 +57,9 @@ function PetProfile() {
       axios.get('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/avatar',{headers:{
         authorization:'Bearer '+localStorage.getItem('AccessToken')
       }})
-        .then((res) => setLoggedIn(res.data))
+        .then((res) => {setLoggedIn(res.data)
+        setAvatar(res.data)
+        })
         .catch((err) => {
           console.log(err.response.data);
           setLoggedIn(false)});
@@ -66,17 +69,15 @@ function PetProfile() {
       axios.get("https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/getSaved",{headers:{
         Authorization:'Bearer ' +localStorage.getItem('AccessToken')}}
     ).then(result=>{
-      console.log('result from getsave is',result.data)
         let likedAnimals=[...JSON.parse(result.data)]
         let idArray=[]
         for (let i=0;i<likedAnimals.length;i++){
           idArray.push(likedAnimals[i].id)
         }
-        console.log('id array is',idArray)
         setSaved(idArray.includes(String(data.id)))
     })},data)
     return <div>
-        <NavBar isLoggedIn={loggedIn}/>
+        <NavBar isLoggedIn={loggedIn} avatar={avatar}/>
         {data&&<ImageSlider images={data.photos} videos={data.videos}/>}
         {data&&<div className='pet-info'>
           <div><h1>{data.name}</h1><img src={data.gender=='male'?require('../Assets/male.png'):require('../Assets/female.png')}/></div>

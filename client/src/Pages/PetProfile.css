@@ -42,6 +42,6 @@
     font-size: 1.3em;
     font-weight: 500;
 }
-.pet-info p{
+.pet-info p,.pet-info a{
     font-size: 1.5em;
 }

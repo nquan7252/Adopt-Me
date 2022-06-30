@@ -8,7 +8,6 @@ function PasswordResetPage1() {
         e.preventDefault();
         axios.post('https://38bh94g0c4.execute-api.us-east-1.amazonaws.com/dev/reset-password',{username:e.target[0].value}).then(
             (result)=>{
-                console.log('success, an email has been sent to you')   
             }
         ).catch((err)=>{setError(err.response.data)})
     }
